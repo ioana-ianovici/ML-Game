@@ -92,24 +92,15 @@ class Biker {
     // console.log(this.fired);
 
     switch (e.keyCode) {
-      case 37:
-        e.preventDefault();
-        this.sprite.move('left');
-        break;
-      case 38:
+      case 38: // up key -> jump
         e.preventDefault();
         this.sprite.move('up');
         break;
-      case 39:
-        e.preventDefault();
-        this.sprite.move('right');
-        break;
-      case 40:
+      case 40: // down key -> duck
         e.preventDefault();
         this.sprite.move('down');
         break;
       default:
-        console.log("only arrow keys work my friend");
       //do nothing
     }
   }
