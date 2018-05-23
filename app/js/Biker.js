@@ -3,7 +3,7 @@ class Biker {
         let me = this;
         me.name = name;
         me.options = {
-            canvas: document.getElementById("biker_layer"),
+            canvas: document.getElementById("biker-layer"),
             imageSrc: "img/biker_spritesheet_1.png",
             numberOfFrames: 8,
             ticksPerFrame: 4,

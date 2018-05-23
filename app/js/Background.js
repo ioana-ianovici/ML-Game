@@ -1,6 +1,6 @@
 class Background {
     constructor() {
-        this.canvas = document.getElementById("background_layer");
+        this.canvas = document.getElementById("background-layer");
     }
 
     load() {}
