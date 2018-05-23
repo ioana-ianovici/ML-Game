@@ -16,7 +16,7 @@ class GameRunner {
   start() {
   	if (!this.isRunning){
   		this.isRunning = true;
-		  this.biker.sprite.move('down');
+        this.biker.sprite.animate('ride');
 	  }
   }
 

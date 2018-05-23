@@ -1,46 +1,45 @@
 class Biker {
-  constructor(name) {
+  constructor() {
     let me = this;
-    me.name = name;
+    me.animations = {
+    	wait: {
+    		numberOfFrames: 1,
+			ticksPerFrame: 60,
+			frameRow: 0
+		},
+        ride: {
+            numberOfFrames: 8,
+            ticksPerFrame: 4,
+            frameRow: 0
+        },
+        jump: {
+            numberOfFrames: 4,
+            ticksPerFrame: 20,
+            frameRow: 1
+        },
+        duck: {
+            numberOfFrames: 2,
+            ticksPerFrame: 20,
+			frameRow: 2
+        },
+        crash: {
+            numberOfFrames: 4,
+            ticksPerFrame: 15,
+			frameRow: 3
+        }
+    };
     me.sprite = new Sprite({
 	    canvas: document.getElementById("biker-layer"),
 	    imageSrc: "app/img/biker_spritesheet_2.png",
-	    numberOfFrames: 8,
-	    ticksPerFrame: 4,
 	    width: 200,
 	    height: 200,
-	    initialDirection: 0,
 	    initialPosition: {
 		    x: 0,
 		    y:150
 	    },
-	    animations: {
-		    down: 0,
-		    left: 1,
-		    right: 2,
-		    up: 3
-	    },
-	    anim: {
-		    move: {
-			    numberOfFrames: 8,
-			    ticksPerFrame: 4,
-			    frameRow: 0
-		    },
-		    jump: {
-			    numberOfFrames: 4,
-			    ticksPerFrame: 20,
-			    frameRow: 1
-		    },
-		    duck: {
-			    numberOfFrames: 2,
-			    ticksPerFrame: 10
-		    },
-		    crash: {
-			    numberOfFrames: 4,
-			    ticksPerFrame: 10
-		    }
-	    }
+	    animations: me.animations
     });
+    me.currentAction= 'ride'; // wait, jump, duck
     me.fired = false;
     me.initialize();
   }
