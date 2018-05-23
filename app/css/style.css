@@ -1,0 +1,20 @@
+#game_container{
+    position: relative;
+    width: 1000px;
+    height: 1000px;
+}
+
+#biker_layer {
+    z-index: 1;
+}
+
+#background_layer{
+    z-index: 0;
+    background-color: #cccccc;
+}
+
+.layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
