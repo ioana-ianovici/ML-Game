@@ -4,7 +4,7 @@ class Biker {
         me.name = name;
         me.options = {
             canvas: document.getElementById("biker-layer"),
-            imageSrc: "img/biker_spritesheet_1.png",
+            imageSrc: "app/img/biker_spritesheet_2.png",
             numberOfFrames: 8,
             ticksPerFrame: 4,
             width: 200,
