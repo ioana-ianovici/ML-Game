@@ -26,8 +26,6 @@ class Biker extends Sprite {
 			jump: {
 				numberOfFrames: 4,
 				frameProps: [{index: 0}, {index: 1}, {index: 1}, {index: 1}, {index: 2}, {index: 2}, {index: 2}, {index: 3}],
-				framesArray: [0, 1, 1, 1, 2, 3], // TODO
-				xArray: [0, 10, 17, 17, 10, 0], // TODO
 				ticksPerFrame: 7,
 				frameRow: 1
 			},
@@ -85,30 +83,6 @@ class Biker extends Sprite {
 			} else {
 				// me.animate('wait');
 			}
-		}
-	}
-
-	action(e) {
-		if (e.repeat || this.fired) {
-			e.preventDefault();
-			return
-		}
-
-		this.fired = e.keyCode;
-		// console.log(this.fired);
-
-		switch (e.keyCode) {
-			case 38:  // up arrow -> leap
-				e.preventDefault();
-				this.sprite.move('up');
-				break;
-			case 40:  // down arrow -> duck
-				e.preventDefault();
-				this.sprite.move('down');
-				break;
-			default:
-				// console.log("only arrow keys work my friend");
-				//do nothing
 		}
 	}
 }
