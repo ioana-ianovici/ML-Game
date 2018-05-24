@@ -47,10 +47,15 @@ class Sprite {
 		me.tick++;
 		if (me.tick > me.ticksPerFrame) {
 			me.render();
-
 			me.tick = 0;
-			me.frameIndex = me.frameIndex < (me.numberOfFrames - 1) ? (me.frameIndex + 1) : 0;
+
+			if (me.noRepeat){
+				me.frameIndex = me.frameIndex < (me.numberOfFrames - 1) ? (me.frameIndex + 1) : (me.numberOfFrames - 1);
+			} else {
+				me.frameIndex = me.frameIndex < (me.numberOfFrames - 1) ? (me.frameIndex + 1) : 0;
+			}
 		}
+
 		if (me.action !== 'wait') {
 			me.animID = window.requestAnimationFrame(function () {
 				me.update();
@@ -71,6 +76,7 @@ class Sprite {
 		me.ticksPerFrame = me.animations[action].ticksPerFrame;
 		me.numberOfFrames = me.animations[action].numberOfFrames;
 		me.frameRow = me.animations[action].frameRow;
+		me.noRepeat = me.animations[action].noRepeat;
 		me.update();
 	}
 }
