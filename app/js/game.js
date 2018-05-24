@@ -27,4 +27,4 @@ class GameRunner {
 
 let game = new GameRunner();
 
-game.start();
+// game.start();
