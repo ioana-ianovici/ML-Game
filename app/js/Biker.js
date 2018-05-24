@@ -1,4 +1,4 @@
-class Biker extends Sprite{
+class Biker extends Sprite {
 	constructor() {
 		super({
 			canvas: document.getElementById("biker-layer"),
@@ -25,9 +25,10 @@ class Biker extends Sprite{
 			},
 			jump: {
 				numberOfFrames: 4,
-				// framesArray: [0, 1, 1, 1, 2, 3], // TODO
-				// xArray: [0 , 10, 17, 17, 10, 0], // TODO
-				ticksPerFrame: 10,
+				frameProps: [{index: 0}, {index: 1}, {index: 1}, {index: 1}, {index: 2}, {index: 2}, {index: 2}, {index: 3}],
+				framesArray: [0, 1, 1, 1, 2, 3], // TODO
+				xArray: [0, 10, 17, 17, 10, 0], // TODO
+				ticksPerFrame: 7,
 				frameRow: 1
 			},
 			duck: {
@@ -65,17 +66,25 @@ class Biker extends Sprite{
 	}
 
 	doWhatISay(e) {
-		if (e.repeat){
+		if (e.repeat) {
 			return
 		}
 
 		let me = this;
-		if (e.type === 'keydown' && e.keyCode === 38){
-			me.animate('jump');
-		} else if (e.type === 'keydown' && e.keyCode === 40) {
-			me.animate('duck')
-		} else if (e.type === 'keyup') {
-			me.animate('ride');
+		if (e.type === 'keydown') {
+			if (e.keyCode === 38) {
+				me.animate('jump');
+			} else if (e.keyCode === 40) {
+				me.animate('duck')
+			} else if (e.keyCode === 37) {
+				me.animate('crash');
+			}
+		} else {
+			if (e.keyCode !== 37) {
+				me.animate('ride');
+			} else {
+				// me.animate('wait');
+			}
 		}
 	}
 

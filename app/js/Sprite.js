@@ -49,11 +49,19 @@ class Sprite {
 			me.render();
 			me.tick = 0;
 
-			if (me.noRepeat){
-				me.frameIndex = me.frameIndex < (me.numberOfFrames - 1) ? (me.frameIndex + 1) : (me.numberOfFrames - 1);
+			if (me.frameProps) {
+				me.frameIndex = me.frameProps[me.framePropsIndex].index;
+				me.framePropsIndex = me.framePropsIndex < me.frameProps.length - 1 ? me.framePropsIndex + 1 : 0;
+
 			} else {
-				me.frameIndex = me.frameIndex < (me.numberOfFrames - 1) ? (me.frameIndex + 1) : 0;
+				if (me.noRepeat) {
+					me.frameIndex = me.frameIndex < (me.numberOfFrames - 1) ? (me.frameIndex + 1) : (me.numberOfFrames - 1);
+				} else {
+					me.frameIndex = me.frameIndex < (me.numberOfFrames - 1) ? (me.frameIndex + 1) : 0;
+				}
 			}
+
+
 		}
 
 		if (me.action !== 'wait') {
@@ -77,6 +85,10 @@ class Sprite {
 		me.numberOfFrames = me.animations[action].numberOfFrames;
 		me.frameRow = me.animations[action].frameRow;
 		me.noRepeat = me.animations[action].noRepeat;
+		me.frameProps = me.animations[action].frameProps;
+		if (me.frameProps) {
+			me.framePropsIndex = 0;
+		}
 		me.update();
 	}
 }
