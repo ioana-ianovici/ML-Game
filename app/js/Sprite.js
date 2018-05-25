@@ -9,6 +9,9 @@ class Sprite {
 
 		me.cPos = options.initialPosition;
 		me.lPos = {};
+		me.initPos = {};
+		me.initPos.x = me.cPos.x;
+		me.initPos.y = me.cPos.y;
 		me.lPos.x = me.cPos.x;
 		me.lPos.y = me.cPos.y;
 	}
@@ -27,6 +30,8 @@ class Sprite {
 		// update the last position
 		me.lPos.x = me.cPos.x;
 		me.lPos.y = me.cPos.y;
+
+		console.log(me.frameIndex, me.framePropsIndex);
 
 		// draw the image on the new position
 		context.drawImage(
@@ -53,6 +58,7 @@ class Sprite {
 				if (me.noRepeat) {
 					if (me.framePropsIndex < me.frameProps.length - 1){
 						me.framePropsIndex ++;
+						me.cPos.y = me.cPos.y + me.frameProps[me.framePropsIndex].dy;
 					} else {
 						me.animate(me.nextAction);
 						return
@@ -60,7 +66,6 @@ class Sprite {
 				} else {
 					me.framePropsIndex = me.framePropsIndex < me.frameProps.length - 1 ? me.framePropsIndex + 1 : 0;
 				}
-
 				me.frameIndex = me.frameProps[me.framePropsIndex].index;
 			} else {
 				if (me.noRepeat) {

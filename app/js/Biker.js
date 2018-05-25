@@ -20,13 +20,13 @@ class Biker extends Sprite {
 			},
 			ride: {
 				numberOfFrames: 8,
-				ticksPerFrame: 4,
+				ticksPerFrame: 7,
 				frameRow: 0
 			},
 			jump: {
 				numberOfFrames: 4,
 				ticksPerFrame: 7,
-				frameProps: [{index: 0}, {index: 1}, {index: 1}, {index: 1}, {index: 2}, {index: 2}, {index: 2}, {index: 3}],
+				frameProps: [{index: 0, dy: 0}, {index: 1, dy: -15}, {index: 1, dy: -12}, {index: 1, dy: -7}, {index: 2, dy: 4}, {index: 2, dy: 15}, {index: 2, dy: 15}, {index: 3, dy: 0}],
 				frameRow: 1,
 				noRepeat: true
 			},
@@ -40,7 +40,7 @@ class Biker extends Sprite {
 				numberOfFrames: 2,
 				ticksPerFrame: 4,
 				frameRow: 2,
-				frameProps: [{index: 1}, {index: 0}],
+				frameProps: [{index: 1, dy: 0}, {index: 0, dy: 0}],
 				noRepeat: true
 			},
 			crash: {
@@ -79,8 +79,6 @@ class Biker extends Sprite {
 		} else {
 			me.nextAction = 'ride';
 		}
-
-		console.log(me.nextAction);
 
 		if (e.repeat) {
 			return
