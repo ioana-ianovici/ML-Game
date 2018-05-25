@@ -25,7 +25,7 @@ class Biker extends Sprite {
 			},
 			jump: {
 				numberOfFrames: 4,
-                ticksPerFrame: 7,
+				ticksPerFrame: 7,
 				frameProps: [{index: 0}, {index: 1}, {index: 1}, {index: 1}, {index: 2}, {index: 2}, {index: 2}, {index: 3}],
 				frameRow: 1,
 				noRepeat: true
@@ -68,11 +68,24 @@ class Biker extends Sprite {
 	}
 
 	doWhatISay(e) {
+		let me = this;
+
+		if (e.type === 'keydown') {
+			if (e.keyCode === 38) {
+				me.nextAction = 'jump';
+			} else if (e.keyCode === 40) {
+				me.nextAction = 'duck';
+			}
+		} else {
+			me.nextAction = 'ride';
+		}
+
+		console.log(me.nextAction);
+
 		if (e.repeat) {
 			return
 		}
 
-		let me = this;
 		if (e.type === 'keydown') {
 			if (e.keyCode === 38) {
 				me.animate('jump');
@@ -82,10 +95,10 @@ class Biker extends Sprite {
 				me.animate('crash');
 			}
 		} else {
-			if (e.keyCode === 39){
+			if (e.keyCode === 39) {
 				me.animate('wait');
-			} else if (e.keyCode !== 37) {
-				me.animate('ride');
+			} else if (e.keyCode === 40) {
+				me.animate('unDuck');
 			}
 		}
 	}
