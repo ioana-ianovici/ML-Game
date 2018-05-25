@@ -50,13 +50,13 @@ class Sprite {
 			me.tick = 0;
 
 			if (me.frameProps) {
-                me.frameIndex = me.frameProps[me.framePropsIndex].index;
+				me.frameIndex = me.frameProps[me.framePropsIndex].index;
 
 				if (me.noRepeat) {
-                    me.framePropsIndex = me.framePropsIndex < me.frameProps.length - 1 ? me.framePropsIndex + 1 : me.frameProps.length;
-                } else {
-                    me.framePropsIndex = me.framePropsIndex < me.frameProps.length - 1 ? me.framePropsIndex + 1 : 0;
-                }
+					me.framePropsIndex = me.framePropsIndex < me.frameProps.length - 1 ? me.framePropsIndex + 1 : me.frameProps.length;
+				} else {
+					me.framePropsIndex = me.framePropsIndex < me.frameProps.length - 1 ? me.framePropsIndex + 1 : 0;
+				}
 			} else {
 				if (me.noRepeat) {
 					me.frameIndex = me.frameIndex < (me.numberOfFrames - 1) ? (me.frameIndex + 1) : (me.numberOfFrames - 1);
@@ -64,8 +64,6 @@ class Sprite {
 					me.frameIndex = me.frameIndex < (me.numberOfFrames - 1) ? (me.frameIndex + 1) : 0;
 				}
 			}
-
-
 		}
 
 		if (me.action !== 'wait') {
@@ -79,6 +77,9 @@ class Sprite {
 
 	animate(action) {
 		let me = this;
+		if (me.frameProps && (me.framePropsIndex < me.frameProps.length - 1)) {
+			return
+		}
 
 		window.cancelAnimationFrame(me.animID);
 

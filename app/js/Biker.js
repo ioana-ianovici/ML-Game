@@ -27,7 +27,8 @@ class Biker extends Sprite {
 				numberOfFrames: 4,
                 ticksPerFrame: 7,
 				frameProps: [{index: 0}, {index: 1}, {index: 1}, {index: 1}, {index: 2}, {index: 2}, {index: 2}, {index: 3}],
-				frameRow: 1
+				frameRow: 1,
+				noRepeat: true
 			},
 			duck: {
 				numberOfFrames: 2,
