@@ -25,23 +25,26 @@ class Biker extends Sprite {
 			},
 			jump: {
 				numberOfFrames: 4,
+                ticksPerFrame: 7,
 				frameProps: [{index: 0}, {index: 1}, {index: 1}, {index: 1}, {index: 2}, {index: 2}, {index: 2}, {index: 3}],
-				ticksPerFrame: 7,
 				frameRow: 1
 			},
 			duck: {
 				numberOfFrames: 2,
-				ticksPerFrame: 10,
-				frameRow: 2
+				ticksPerFrame: 4,
+				frameRow: 2,
+				noRepeat: true
 			},
 			unDuck: {
 				numberOfFrames: 2,
-				ticksPerFrame: 10,
-				frameRow: 2
+				ticksPerFrame: 4,
+				frameRow: 2,
+				frameProps: [{index: 1}, {index: 0}],
+				noRepeat: true
 			},
 			crash: {
 				numberOfFrames: 5,
-				ticksPerFrame: 8,
+				ticksPerFrame: 7,
 				frameRow: 3,
 				noRepeat: true
 			}
@@ -78,10 +81,10 @@ class Biker extends Sprite {
 				me.animate('crash');
 			}
 		} else {
-			if (e.keyCode !== 37) {
+			if (e.keyCode === 39){
+				me.animate('wait');
+			} else if (e.keyCode !== 37) {
 				me.animate('ride');
-			} else {
-				// me.animate('wait');
 			}
 		}
 	}
