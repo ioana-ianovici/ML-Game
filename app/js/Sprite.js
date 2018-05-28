@@ -31,8 +31,6 @@ class Sprite {
 		me.lPos.x = me.cPos.x;
 		me.lPos.y = me.cPos.y;
 
-		console.log(me.frameIndex, me.framePropsIndex);
-
 		// draw the image on the new position
 		context.drawImage(
 				me.image,

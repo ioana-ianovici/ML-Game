@@ -20,13 +20,13 @@ class Biker extends Sprite {
 			},
 			ride: {
 				numberOfFrames: 8,
-				ticksPerFrame: 7,
+				ticksPerFrame: 4,
 				frameRow: 0
 			},
 			jump: {
 				numberOfFrames: 4,
 				ticksPerFrame: 7,
-				frameProps: [{index: 0, dy: 0}, {index: 1, dy: -15}, {index: 1, dy: -12}, {index: 1, dy: -7}, {index: 2, dy: 4}, {index: 2, dy: 15}, {index: 2, dy: 15}, {index: 3, dy: 0}],
+				frameProps: [{index: 0, dy: 0}, {index: 1, dy: -40}, {index: 1, dy: -30}, {index: 1, dy: -20},{index: 1, dy: -10},{index: 2, dy: 0},{index: 2, dy: 10}, {index: 2, dy: 20}, {index: 2, dy: 30}, {index: 2, dy: 40}, {index: 3, dy: 0}],
 				frameRow: 1,
 				noRepeat: true
 			},

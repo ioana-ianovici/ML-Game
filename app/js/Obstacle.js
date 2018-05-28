@@ -6,7 +6,7 @@ class Obstacle extends Sprite {
 			width: 100,
 			height: 134,
 			initialPosition: {
-				x: 800,
+				x: 1000,
 				y: 250
 			}
 		});
@@ -17,12 +17,6 @@ class Obstacle extends Sprite {
 				numberOfFrames: 1,
 				ticksPerFrame: 60,
 				frameRow: 0
-			},
-			crash: {
-				numberOfFrames: 5,
-				ticksPerFrame: 7,
-				frameRow: 3,
-				noRepeat: true
 			}
 		};
 
