@@ -1,15 +1,17 @@
 class GameRunner {
   constructor() {
-  	let me = this;
-    me.background = new Background();
-    me.biker = new Biker();
-    me.isRunning = false;
-
+    this.currentSpeed = 1;
+    this.points = 0;
   }
 
   start() {
   	if (!this.isRunning){
-  		this.isRunning = true;
+        let me = this;
+  		me.isRunning = true;
+        me.background = new Background();
+        me.biker = new Biker();
+        me.obstacle = new Obstacle();
+        me.isRunning = false;
 	  }
   }
 
@@ -20,4 +22,4 @@ class GameRunner {
 
 let game = new GameRunner();
 
-// game.start();
+game.start();

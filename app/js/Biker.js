@@ -2,7 +2,7 @@ class Biker extends Sprite {
 	constructor() {
 		super({
 			canvas: document.getElementById("biker-layer"),
-			imageSrc: "app/img/biker_spritesheet_2.png",
+			imageSrc: "app/img/biker.png",
 			width: 200,
 			height: 200,
 			initialPosition: {
