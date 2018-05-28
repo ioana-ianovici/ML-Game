@@ -1,6 +1,6 @@
 class GameRunner {
   constructor() {
-    this.currentSpeed = 1;
+    this.currentSpeed = 4;
     this.points = 0;
     this.acceleration = 0.001;
   }
@@ -13,7 +13,17 @@ class GameRunner {
         me.biker = new Biker();
         me.obstacle = new Obstacle();
         me.moveObstacles();
+        me.init();
 	  }
+  }
+
+  init(){
+      let me = this;
+      window.addEventListener('keydown', function (e) {
+          if (e.keyCode === 32){
+              me.gameOver()
+          }
+      })
   }
 
   moveObstacles(){
@@ -22,13 +32,13 @@ class GameRunner {
       me.currentSpeed+= me.acceleration;
       me.obstacle.render();
       me.obstacle.cPos.x = me.obstacle.cPos.x > -me.obstacle.width ? me.obstacle.cPos.x - me.currentSpeed : 1000;
-      window.requestAnimationFrame(function () {
+      me.animID = window.requestAnimationFrame(function () {
           me.moveObstacles();
       });
   }
 
   gameOver() {
-
+    window.cancelAnimationFrame(this.animID);
   }
 }
 
