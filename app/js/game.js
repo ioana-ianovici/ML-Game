@@ -6,6 +6,7 @@ class GameRunner {
 		me.acceleration = 0.001;
 		me.background = new Background();
 		me.biker = new Biker();
+		me.obstacle = new Obstacle();
 		me.init()
 	}
 
@@ -15,8 +16,8 @@ class GameRunner {
 		if (!me.isRunning) {
 			me.isRunning = true;
 			me.startEventHandler();
-			me.obstacle = new Obstacle();
 			me.moveObstacles();
+			me.gameOverHandler();
 		}
 	}
 
@@ -24,19 +25,33 @@ class GameRunner {
 		this.startEventHandler();
 	}
 
+	gameOverHandler(){
+		let me = this;
+		let handlerFunc = function (e) {
+			if (e.keyCode === 81) {
+				me.gameOver();
+			}
+		};
+		me.GOHandler = handlerFunc.bind(me);
+		window.addEventListener('keydown', me.GOHandler)
+	}
+
 	startEventHandler() {
 		let me = this;
 		let handlerFunc = function (e) {
+			console.log(e.keyCode);
 			if (e.keyCode === 32 || e.keyCode === 38) {
 				me.start()
 			}
 		};
-		let handler = handlerFunc.bind(me);
+		if (!me.handler){
+			me.handler = handlerFunc.bind(me);
+		}
 
 		if (!me.isRunning) {
-			window.addEventListener('keydown', handler);
+			window.addEventListener('keydown', me.handler);
 		} else {
-			window.removeEventListener('keydown', handler);
+			window.removeEventListener('keydown', me.handler);
 			console.log('removed event handler')
 		}
 	}
@@ -53,10 +68,10 @@ class GameRunner {
 	}
 
 	gameOver() {
+		console.log('game over');
 		window.cancelAnimationFrame(this.animID);
+		this.biker.animate('crash');
 	}
 }
 
 let game = new GameRunner();
-
-// game.start();
