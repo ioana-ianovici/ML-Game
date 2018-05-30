@@ -26,27 +26,26 @@ class Biker extends Sprite {
 			jump: {
 				numberOfFrames: 4,
 				ticksPerFrame: 7,
-				frameProps: [{index: 0, dy: 0}, {index: 1, dy: -20}, {index: 1, dy: -15}, {index: 1, dy: -5}, {index: 1, dy: 5}, {index: 2, dy: 15},{index: 2, dy: 20},{index: 3, dy: 0}],
-				frameRow: 1,
+				frameProps: [{index: 2, dy: 0}, {index: 3, dy: -20}, {index: 3, dy: -15}, {index: 3, dy: -5}, {index: 4, dy: 5}, {index: 4, dy: 15},{index: 4, dy: 20},{index: 5, dy: 0}],
+				frameRow: 4,
 				noRepeat: true
 			},
 			duck: {
-				numberOfFrames: 2,
+				numberOfFrames: 7,
 				ticksPerFrame: 4,
-				frameRow: 2,
-				noRepeat: true
+				frameRow: 1
 			},
 			unDuck: {
 				numberOfFrames: 2,
 				ticksPerFrame: 4,
-				frameRow: 2,
-				frameProps: [{index: 1, dy: 0}, {index: 0, dy: 0}],
+				frameRow: 1,
+				frameProps: [{index: 6, dy: 0}, {index: 7, dy: 0}],
 				noRepeat: true
 			},
 			crash: {
-				numberOfFrames: 5,
+				numberOfFrames: 8,
 				ticksPerFrame: 7,
-				frameRow: 3,
+				frameRow: 2,
 				noRepeat: true
 			}
 		};
