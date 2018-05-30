@@ -6,7 +6,7 @@ class Biker extends Sprite {
 			width: 200,
 			height: 200,
 			initialPosition: {
-				x: 0,
+				x: 100,
 				y: 250
 			}
 		});
@@ -26,7 +26,7 @@ class Biker extends Sprite {
 			jump: {
 				numberOfFrames: 4,
 				ticksPerFrame: 7,
-				frameProps: [{index: 0, dy: 0}, {index: 1, dy: -40}, {index: 1, dy: -30}, {index: 1, dy: -20},{index: 1, dy: -10},{index: 2, dy: 0},{index: 2, dy: 10}, {index: 2, dy: 20}, {index: 2, dy: 30}, {index: 2, dy: 40}, {index: 3, dy: 0}],
+				frameProps: [{index: 0, dy: 0}, {index: 1, dy: -23}, {index: 1, dy: -15}, {index: 1, dy: 0},{index: 2, dy: 15},{index: 2, dy: 23},{index: 2, dy: 0}],
 				frameRow: 1,
 				noRepeat: true
 			},
