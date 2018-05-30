@@ -7,7 +7,7 @@ class Biker extends Sprite {
 			height: 200,
 			initialPosition: {
 				x: 0,
-				y: 150
+				y: 250
 			}
 		});
 

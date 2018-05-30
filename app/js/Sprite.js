@@ -24,8 +24,8 @@ class Sprite {
 		context.clearRect(
 				me.lPos.x,
 				me.lPos.y,
-				me.width,
-				me.height);
+				me.width/2,
+				me.height/2);
 
 		// update the last position
 		me.lPos.x = me.cPos.x;
@@ -40,8 +40,8 @@ class Sprite {
 				me.height,
 				me.cPos.x,
 				me.cPos.y,
-				me.width,
-				me.height
+				me.width/2,
+				me.height/2
 		);
 	}
 

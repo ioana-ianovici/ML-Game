@@ -7,7 +7,7 @@ class Obstacle extends Sprite {
 			height: 134,
 			initialPosition: {
 				x: 1000,
-				y: 250
+				y: 300
 			}
 		});
 
