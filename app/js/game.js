@@ -11,7 +11,6 @@ class GameRunner {
 	}
 
 	start() {
-		console.log('game started');
 		let me = this;
 		if (!me.isRunning) {
 			me.isRunning = true;
@@ -39,7 +38,6 @@ class GameRunner {
 	startEventHandler() {
 		let me = this;
 		let handlerFunc = function (e) {
-			console.log(e.keyCode);
 			if (e.keyCode === 32 || e.keyCode === 38) {
 				me.start()
 			}
@@ -52,7 +50,6 @@ class GameRunner {
 			window.addEventListener('keydown', me.handler);
 		} else {
 			window.removeEventListener('keydown', me.handler);
-			console.log('removed event handler')
 		}
 	}
 
