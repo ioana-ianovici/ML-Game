@@ -2,7 +2,7 @@ class Biker extends Sprite {
 	constructor() {
 		super({
 			canvas: document.getElementById("biker-layer"),
-			imageSrc: "app/img/biker_002.png",
+			imageSrc: "app/img/biker_003.png",
 			width: 100,
 			height: 100,
 			initialPosition: {
@@ -43,9 +43,9 @@ class Biker extends Sprite {
 				noRepeat: true
 			},
 			crash: {
-				numberOfFrames: 8,
-				ticksPerFrame: 7,
-				frameRow: 2,
+				numberOfFrames: 9,
+				ticksPerFrame: 4,
+				frameRow: 3,
 				noRepeat: true
 			}
 		};

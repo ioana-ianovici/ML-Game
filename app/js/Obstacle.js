@@ -2,7 +2,7 @@ class Obstacle extends Sprite {
 	constructor() {
 		super({
 			canvas: document.getElementById("background-layer"),
-			imageSrc: "app/img/rock.png",
+			imageSrc: "app/img/environment_sheet.png",
 			width: 100,
 			height: 134,
 			initialPosition: {
