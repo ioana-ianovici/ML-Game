@@ -26,7 +26,7 @@ class Obstacle extends Sprite {
 	initialize() {
 		let me = this;
 		window.addEventListener("load", function () {
-			me.animate('wait');
+			me.render();
 		});
 	}
 

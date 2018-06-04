@@ -18,7 +18,7 @@ gulp.task('css', function () {
 gulp.task('scripts', function () {
   return gulp.src([
     'app/js/Background.js',
-    'app/js/Sprite.js',
+    'app/js/Sprite_dynamic.js',
     'app/js/Biker.js',
     'app/js/game.js'
   ])
@@ -29,7 +29,7 @@ gulp.task('scripts', function () {
 gulp.task('script-uglify', function () {
   return gulp.src([
     'app/js/Background.js',
-    'app/js/Sprite.js',
+    'app/js/Sprite_dynamic.js',
     'app/js/Biker.js',
     'app/js/game.js'
   ])
