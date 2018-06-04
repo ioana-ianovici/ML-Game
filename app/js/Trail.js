@@ -1,13 +1,13 @@
-class Obstacle extends Sprite {
-	constructor() {
+class Trail extends Sprite {
+	constructor(x) {
 		super({
 			canvas: document.getElementById("background-layer"),
 			imageSrc: "app/img/environment_sheet.png",
 			width: 512,
 			height: 52,
-			origin: {x: 100, y: 218},
+			origin: {x: 0, y: 218},
 			initialPosition: {
-				x: 1000,
+				x,
 				y: 315
 			}
 		});

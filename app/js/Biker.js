@@ -2,7 +2,7 @@ class Biker extends Sprite_dynamic {
 	constructor() {
 		super({
 			canvas: document.getElementById("biker-layer"),
-			imageSrc: "app/img/biker_003.png",
+			imageSrc: "app/img/biker_004.png",
 			width: 100,
 			height: 100,
 			initialPosition: {
@@ -26,12 +26,13 @@ class Biker extends Sprite_dynamic {
 			jump: {
 				numberOfFrames: 4,
 				ticksPerFrame: 7,
-				frameProps: [{index: 1, dy: 0}, {index: 2, dy: -20}, {index: 2, dy: -15}, {index: 2, dy: -5}, {index: 3, dy: 5}, {index: 3, dy: 15},{index: 3, dy: 20},{index: 4, dy: 0}],
+				frameProps: [{index: 0, dy: 0}, {index: 1, dy: -20}, {index: 1, dy: -15}, {index: 1, dy: -5}, {index: 2, dy: 5}, {index: 2, dy: 15},{index: 2, dy: 20},{index: 3, dy: 0}],
 				frameRow: 4,
 				noRepeat: true
 			},
 			duck: {
-				numberOfFrames: 7,
+				numberOfFrames: 6,
+				frameProps: [{index: 1, dy: 0}, {index: 2, dy: 0}, {index: 3, dy: 0}, {index: 4, dy: 0}, {index: 5, dy: 0}, {index: 6, dy: 0},],
 				ticksPerFrame: 4,
 				frameRow: 1
 			},

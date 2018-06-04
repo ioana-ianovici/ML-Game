@@ -4,6 +4,7 @@ class Sprite {
 		me.canvas = options.canvas;
 		me.image = new Image();
 		me.image.src = options.imageSrc;
+		me.origin = options.origin;
 		me.width = options.width;
 		me.height = options.height;
 
@@ -34,8 +35,8 @@ class Sprite {
 		// draw the image on the new position
 		context.drawImage(
 				me.image,
-				me.frameIndex * me.width,
-				me.frameRow * me.height,
+				me.origin.x,
+				me.origin.y,
 				me.width,
 				me.height,
 				me.cPos.x,

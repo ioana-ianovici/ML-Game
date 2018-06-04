@@ -7,6 +7,7 @@ class GameRunner {
 		me.background = new Background();
 		me.biker = new Biker();
 		me.obstacle = new Obstacle();
+		me.initializeTrail();
 		me.init()
 	}
 
@@ -51,6 +52,14 @@ class GameRunner {
 		} else {
 			window.removeEventListener('keydown', me.handler);
 		}
+	}
+
+	initializeTrail(){
+		this.tile_1 = new Trail(0);
+		this.tile_2 = new Trail(512);
+
+		this.tile_1.render();
+		this.tile_2.render();
 	}
 
 	moveObstacles() {
