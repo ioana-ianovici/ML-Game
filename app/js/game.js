@@ -34,8 +34,8 @@ class GameRunner {
 		me.acceleration = 0.001;
 		me.background = new Background();
 		me.biker = new Biker();
-		me.obstacle = new Obstacle();
 		me.initializeTrail();
+		me.obstacles = new Obstacles();
 		me.init()
 	}
 
@@ -91,6 +91,7 @@ class GameRunner {
 		me.points++;
 		me.currentSpeed += me.acceleration;
 		me.trail.move(me.currentSpeed);
+		me.obstacles.move(me.currentSpeed);
 		me.animID = window.requestAnimationFrame(function () {
 			me.moveObstacles();
 		});

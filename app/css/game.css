@@ -5,6 +5,10 @@
 }
 
 #biker-layer {
+    z-index: 2;
+}
+
+#obstacle-layer {
     z-index: 1;
 }
 
