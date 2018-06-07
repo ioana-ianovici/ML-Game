@@ -87,9 +87,10 @@ class Sprite_dynamic {
 	animate(action) {
 		let me = this;
 
-		if (me.frameProps && (me.framePropsIndex < me.frameProps.length - 1)) {
+		if (action !== 'unDuck' && me.frameProps && (me.framePropsIndex < me.frameProps.length - 1)) {
 			return
 		}
+
 
 		me.action = action;
 		me.tick = 0;

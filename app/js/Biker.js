@@ -32,7 +32,14 @@ class Biker extends Sprite_dynamic {
 			},
 			duck: {
 				numberOfFrames: 6,
-				frameProps: [{index: 1, dy: 0}, {index: 2, dy: 0}, {index: 3, dy: 0}, {index: 4, dy: 0}, {index: 5, dy: 0}, {index: 6, dy: 0},],
+				frameProps: [{index: 0, dy: 0}, {index: 1, dy: 0}],
+				ticksPerFrame: 4,
+				frameRow: 1,
+				noRepeat: true
+			},
+			ducking: {
+				numberOfFrames: 6,
+				frameProps: [{index: 1, dy: 0}, {index: 2, dy: 0}, {index: 3, dy: 0}, {index: 4, dy: 0}, {index: 5, dy: 0}, {index: 6, dy: 0}],
 				ticksPerFrame: 4,
 				frameRow: 1
 			},
@@ -92,7 +99,8 @@ class Biker extends Sprite_dynamic {
 			if (e.keyCode === 38) {
 				me.animate('jump');
 			} else if (e.keyCode === 40) {
-				me.animate('duck')
+				me.animate('duck');
+				me.nextAction = 'ducking';
 			} else if (e.keyCode === 37) {
 				me.animate('crash');
 			}
@@ -101,6 +109,7 @@ class Biker extends Sprite_dynamic {
 				me.animate('wait');
 			} else if (e.keyCode === 40) {
 				me.animate('unDuck');
+				me.nextAction = 'ride';
 			}
 		}
 	}
