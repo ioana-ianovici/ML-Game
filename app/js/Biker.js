@@ -62,6 +62,10 @@ class Biker extends Sprite_dynamic {
 		document.addEventListener('keydown', function (e) {
 			me.doWhatISay(e);
 		});
+		document.addEventListener('touchstart', function () {
+			me.animate('jump');
+			me.nextAction = 'ride';
+		});
 		document.addEventListener('keyup', function (e) {
 			me.doWhatISay(e);
 		});

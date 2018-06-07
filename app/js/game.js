@@ -67,7 +67,7 @@ class GameRunner {
 	startEventHandler() {
 		let me = this;
 		let handlerFunc = function (e) {
-			if (e.keyCode === 32 || e.keyCode === 38) {
+			if (e.keyCode === 32 || e.keyCode === 38 || e.type === 'touchstart') {
 				me.start()
 			}
 		};
@@ -77,8 +77,10 @@ class GameRunner {
 
 		if (!me.isRunning) {
 			window.addEventListener('keydown', me.handler);
+			window.addEventListener('touchstart', me.handler);
 		} else {
 			window.removeEventListener('keydown', me.handler);
+			window.removeEventListener('touchstart', me.handler);
 		}
 	}
 
