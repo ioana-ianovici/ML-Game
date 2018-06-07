@@ -6,44 +6,53 @@ let rename = require('gulp-rename');
 
 
 gulp.task('css', function () {
-  gulp.src([
-    'app/css/style.css',
-    'app/css/game.css'
-  ])
-    .pipe(concat('../release/app.css'))
-    .pipe(cssMin())
-    .pipe(gulp.dest('release'));
+	gulp.src([
+		'app/css/style.css',
+		'app/css/game.css'
+	])
+			.pipe(concat('../release/app.css'))
+			.pipe(cssMin())
+			.pipe(gulp.dest('release'));
 });
 
 gulp.task('scripts', function () {
-  return gulp.src([
-    'app/js/Background.js',
-    'app/js/Sprite_dynamic.js',
-    'app/js/Biker.js',
-    'app/js/game.js'
-  ])
-    .pipe(concat('../release/app.js'))
-    .pipe(gulp.dest('release'));
+	return gulp.src([
+		'app/js/globalFunctions.js',
+		'app/js/Sprite.js',
+		'app/js/TrailTile.js',
+		'app/js/Rock.js',
+		'app/js/Cloud.js',
+		'app/js/Plane.js',
+		'app/js/Obstacles.js',
+		'app/js/Trail.js',
+		'app/js/Sky.js',
+		'app/js/Background.js',
+		'app/js/Sprite_dynamic.js',
+		'app/js/Biker.js',
+		'app/js/game.js'
+	])
+			.pipe(concat('../release/app.js'))
+			.pipe(gulp.dest('release'));
 });
 
 gulp.task('script-uglify', function () {
-  return gulp.src([
-    'app/js/Background.js',
-    'app/js/Sprite_dynamic.js',
-    'app/js/Biker.js',
-    'app/js/game.js'
-  ])
-    .pipe(concat('../tmp/app.js'))
-    .pipe(rename("app.min.js"))
-    .pipe(uglify(/* options */))
-    .pipe(gulp.dest("release"));
+	return gulp.src([
+		'app/js/Background.js',
+		'app/js/Sprite_dynamic.js',
+		'app/js/Biker.js',
+		'app/js/game.js'
+	])
+			.pipe(concat('../tmp/app.js'))
+			.pipe(rename("app.min.js"))
+			.pipe(uglify(/* options */))
+			.pipe(gulp.dest("release"));
 });
 
 gulp.task("uglify", function () {
-  return gulp.src("release/app.js")
-    .pipe(rename("app.min.js"))
-    .pipe(uglify(/* options */))
-    .pipe(gulp.dest("release"));
+	return gulp.src("release/app.js")
+			.pipe(rename("app.min.js"))
+			.pipe(uglify(/* options */))
+			.pipe(gulp.dest("release"));
 });
 
 gulp.task('default', ['scripts', 'uglify']);
