@@ -1,5 +1,5 @@
 class Cloud extends Sprite {
-	constructor() {
+	constructor(x, h) {
 		super({
 			canvas: document.getElementById("background-layer"),
 			imageSrc: "app/img/environment_sheet.png",
@@ -7,8 +7,8 @@ class Cloud extends Sprite {
 			height: 64,
 			origin: {x: 0, y: 24},
 			initialPosition: {
-				x: 500,
-				y: 50
+				x,
+				y: h
 			}
 		});
 	}

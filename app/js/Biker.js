@@ -7,7 +7,7 @@ class Biker extends Sprite_dynamic {
 			height: 100,
 			initialPosition: {
 				x: 0,
-				y: 240
+				y: 185
 			}
 		});
 

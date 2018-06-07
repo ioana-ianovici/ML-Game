@@ -24,12 +24,9 @@ class Trail {
 
 	reDraw(){
 		let me = this;
-		// below function will update tiles in their order from left to right
-		[{obj:me.tile_1, index: 1, pos: me.tile_1.cPos.x}, {obj:me.tile_2, index: 2, pos: me.tile_2.cPos.x}, {obj:me.tile_3, index: 3, pos: me.tile_3.cPos.x}].sort((prev, curr) => {
-			return prev.pos < curr.pos ? -1 : 1;
-		}).map((tile) => {
-			tile.obj.render();
-			return tile.index;
-		});
+
+		me.tile_1.draw();
+		me.tile_2.draw();
+		me.tile_3.draw();
 	}
 }
