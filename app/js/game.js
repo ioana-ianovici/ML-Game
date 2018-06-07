@@ -33,10 +33,9 @@ class GameRunner {
 		me.points = 0;
 		me.acceleration = 0.001;
 		me.background = new Background();
-		me.biker = new Biker();
-		me.initializeTrail();
 		me.obstacles = new Obstacles();
-		me.init()
+		me.biker = new Biker();
+		me.startEventHandler();
 	}
 
 	start() {
@@ -49,9 +48,6 @@ class GameRunner {
 		}
 	}
 
-	init() {
-		this.startEventHandler();
-	}
 
 	gameOverHandler(){
 		let me = this;
@@ -84,17 +80,14 @@ class GameRunner {
 		}
 	}
 
-	initializeTrail(){
-		this.trail = new Trail();
-	}
-
 	moveObstacles() {
 		let me = this;
+
 		me.points++;
 		me.currentSpeed += me.acceleration;
-		me.trail.move(me.currentSpeed);
+		me.background.move(me.currentSpeed);
 		me.obstacles.move(me.currentSpeed);
-		me.background.move();
+
 		me.animID = window.requestAnimationFrame(function () {
 			me.moveObstacles();
 		});

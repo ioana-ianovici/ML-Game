@@ -1,5 +1,5 @@
 class Cloud extends Sprite {
-	constructor(x, h) {
+	constructor(x, h, s) {
 		super({
 			canvas: document.getElementById("background-layer"),
 			imageSrc: "app/img/environment_sheet.png",
@@ -11,5 +11,6 @@ class Cloud extends Sprite {
 				y: h
 			}
 		});
+		this.speed = s;
 	}
 }

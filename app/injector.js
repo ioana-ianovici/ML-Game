@@ -1,22 +1,23 @@
 // IIFE
 (()=>{
 	window.requestAnimationFrame(AIProcess);
-	jump();
+	start();
 
 	function AIProcess() {
 		let speed = game.currentSpeed;
-		let distance = game.obstacle.cPos.x - game.biker.cPos.x - game.biker.width + 120;
+		let distance = game.obstacles['obstacle_1'].cPos.x - game.biker.cPos.x - game.biker.width;
 		let minJumpDistance = speed * 7 * 2;
 		let maxJumpDistance = speed * 7 * 3.5;
 
 		if (distance < maxJumpDistance && distance > minJumpDistance){
-			jump();
+			game.biker.animate('jump');
 		}
 
 		window.requestAnimationFrame(AIProcess);
 	}
 
-	function jump(){
+	function start(){
+		game.start();
 		game.biker.animate('jump');
 	}
 

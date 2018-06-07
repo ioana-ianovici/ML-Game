@@ -18,10 +18,8 @@ class Sprite {
 	}
 
 	render() {
-		let me = this;
-
-		me.clear();
-		me.draw();
+		this.clear();
+		this.draw();
 	}
 
 	clear(){
@@ -43,6 +41,7 @@ class Sprite {
 	draw(){
 		let me = this,
 				context = me.canvas.getContext('2d');
+
 		// draw the image on the new position
 		context.drawImage(
 				me.image,
