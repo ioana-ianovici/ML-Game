@@ -3,12 +3,12 @@ class Cloud extends Sprite {
 		super({
 			canvas: document.getElementById("background-layer"),
 			imageSrc: "app/img/environment_sheet.png",
-			width: 100,
-			height: 90,
-			origin: {x: 0, y: 128},
+			width: 128,
+			height: 64,
+			origin: {x: 0, y: 24},
 			initialPosition: {
-				x: 1000,
-				y: 280
+				x: 500,
+				y: 50
 			}
 		});
 	}

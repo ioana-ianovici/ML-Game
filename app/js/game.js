@@ -92,6 +92,7 @@ class GameRunner {
 		me.currentSpeed += me.acceleration;
 		me.trail.move(me.currentSpeed);
 		me.obstacles.move(me.currentSpeed);
+		me.background.move();
 		me.animID = window.requestAnimationFrame(function () {
 			me.moveObstacles();
 		});
