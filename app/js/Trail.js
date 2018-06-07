@@ -11,10 +11,10 @@ class Trail {
 		});
 	}
 
-	move(distance) {
+	move(distance){
 		let me = this;
 
-		for (let i = 1; i <= 3; i++) {
+		for (let i=1; i<=3; i++){
 			let tileName = 'tile_' + i;
 			// when the tile passes left side of the canvass it is repositioned at the right of the other tiles
 			me[tileName].cPos.x = me[tileName].cPos.x <= -me.width ? me[tileName].cPos.x + me.width * 3 - distance : me[tileName].cPos.x - distance;
@@ -23,7 +23,7 @@ class Trail {
 		me.reDraw();
 	}
 
-	reDraw() {
+	reDraw(){
 		let me = this;
 
 		me.tile_1.draw();

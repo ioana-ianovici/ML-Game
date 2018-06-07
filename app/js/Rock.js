@@ -19,7 +19,7 @@ class Rock extends Sprite {
 			origin: {x: type, y: 128},
 			initialPosition: {
 				x: pos,
-				y: 225
+				y: 175
 			}
 		});
 	}

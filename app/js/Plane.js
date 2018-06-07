@@ -1,15 +1,16 @@
-class TrailTile extends Sprite {
-	constructor(x) {
+class Cloud extends Sprite {
+	constructor(x, h, s) {
 		super({
 			canvas: document.getElementById("background-layer"),
 			imageSrc: "app/img/environment_sheet.png",
-			width: 512,
-			height: 40,
-			origin: {x: 0, y: 218},
+			width: 128,
+			height: 64,
+			origin: {x: 0, y: 24},
 			initialPosition: {
 				x,
-				y: 210
+				y: h
 			}
 		});
+		this.speed = s;
 	}
 }
