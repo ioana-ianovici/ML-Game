@@ -26,7 +26,7 @@ class Biker extends Sprite_dynamic {
 			jump: {
 				numberOfFrames: 4,
 				ticksPerFrame: 7,
-				frameProps: [{index: 0, dy: 0}, {index: 1, dy: -20}, {index: 1, dy: -15}, {index: 1, dy: -5}, {index: 2, dy: 5}, {index: 2, dy: 15},{index: 2, dy: 20},{index: 3, dy: 0}],
+				frameProps: [{index: 0, dy: 0}, {index: 1, dy: -22}, {index: 1, dy: -17}, {index: 1, dy: -10}, {index: 2, dy: 10}, {index: 2, dy: 17},{index: 2, dy: 22},{index: 3, dy: 0}],
 				frameRow: 4,
 				noRepeat: true
 			},

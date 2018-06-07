@@ -12,7 +12,7 @@ class Sky {
 	generateClouds() {
 		for (let i = 1; i <= this.cloudsNumber; i++) {
 			let cloudName = 'cloud_' + i;
-			this[cloudName] = new Cloud(randomNumber(0, 850), randomNumber(0, 80), randomNumber(10, 20) / 10);
+			this[cloudName] = new Cloud(randomNumber(0, 1200), randomNumber(0, 80), randomNumber(10, 20) / 10);
 		}
 	}
 

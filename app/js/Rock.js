@@ -1,12 +1,8 @@
 class Rock extends Sprite {
 	constructor(pos, type) {
 
-		if (type===1 || type===2){
-			if (type ===1 ){
-				type = 0
-			} else{
-				type = 100
-			}
+		if (type === 2) {
+			type = 100
 		} else {
 			type = 0
 		}

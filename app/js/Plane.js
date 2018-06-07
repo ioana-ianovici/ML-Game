@@ -1,16 +1,15 @@
-class Cloud extends Sprite {
-	constructor(x, h, s) {
+class Plane extends Sprite {
+	constructor(x) {
 		super({
 			canvas: document.getElementById("background-layer"),
 			imageSrc: "app/img/environment_sheet.png",
-			width: 128,
-			height: 64,
-			origin: {x: 0, y: 24},
+			width: 100,
+			height: 40,
+			origin: {x: 0, y: 88},
 			initialPosition: {
 				x,
-				y: h
+				y: 132
 			}
 		});
-		this.speed = s;
 	}
 }
