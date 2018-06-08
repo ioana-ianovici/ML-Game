@@ -9,30 +9,6 @@ class Sprite {
 		me.height = options.height;
 
 		me.cPos = options.pos;
-		me.lPos = {};
-		me.lPos.x = me.cPos.x;
-		me.lPos.y = me.cPos.y;
-	}
-
-	render() {
-		this.clear();
-		this.draw();
-	}
-
-	clear(){
-		let me = this,
-				context = me.canvas.getContext('2d');
-
-		// remove the image from last position
-		context.clearRect(
-				me.lPos.x,
-				me.lPos.y,
-				me.width,
-				me.height);
-
-		// update the last position
-		me.lPos.x = me.cPos.x;
-		me.lPos.y = me.cPos.y;
 	}
 
 	draw(){
