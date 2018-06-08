@@ -2,9 +2,9 @@ function randomNumber(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
-
-
+function probability(percent) {
+	return Math.random() * 100 < percent;
+}
 
 
 // Function Fix for "requestAnimationFrame" 12.06.17

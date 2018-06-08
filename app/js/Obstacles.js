@@ -18,17 +18,15 @@ class Obstacles {
 
 	createObstacle(obstacleName) {
 		let me = this;
-		switch (randomNumber(1, 2)) {
-			case 1:
-				me[obstacleName] = new Rock(randomNumber(me.lastObstaclePosition + 500, me.lastObstaclePosition + 1000), randomNumber(1, 2));
-				me.lastObstaclePosition = me[obstacleName].cPos.x;
-				break;
-			case 2:
-				me[obstacleName] = new Plane(randomNumber(me.lastObstaclePosition + 500, me.lastObstaclePosition + 1000));
-				me.lastObstaclePosition = me[obstacleName].cPos.x;
-				break;
+		if (probability(70)) {
+			me[obstacleName] = new Rock(randomNumber(me.lastObstaclePosition + 500, me.lastObstaclePosition + 1000), randomNumber(1, 2));
+		} else {
+			me[obstacleName] = new Plane(randomNumber(me.lastObstaclePosition + 500, me.lastObstaclePosition + 1000));
 		}
+
+		me.lastObstaclePosition = me[obstacleName].cPos.x;
 	}
+
 
 	move(distance) {
 		let me = this;
