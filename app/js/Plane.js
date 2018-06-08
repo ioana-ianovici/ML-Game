@@ -11,5 +11,27 @@ class Plane extends Sprite {
 				y: 132
 			}
 		});
+
+		let me = this;
+		me.framesNum = 2;
+		me.frameIndex = 0;
+		me.tpf = 10;
+		me.tick = 0;
+	}
+
+	draw() {
+		let me = this;
+		me.tick++;
+		if (me.tick >= me.tpf) {
+			me.tick = 0;
+			me.switchFrame()
+		}
+		super.draw();
+	}
+
+	switchFrame() {
+		let me = this;
+		me.frameIndex = me.frameIndex >= me.framesNum - 1 ? 0 : me.frameIndex + 1;
+		me.origin.x = me.frameIndex * me.width;
 	}
 }
