@@ -18,6 +18,7 @@ class Obstacles {
 
 	createObstacle(obstacleName) {
 		let me = this;
+
 		if (probability(70)) {
 			me[obstacleName] = new Rock(randomNumber(me.lastObstaclePosition + 500, me.lastObstaclePosition + 1000), randomNumber(1, 2));
 		} else {

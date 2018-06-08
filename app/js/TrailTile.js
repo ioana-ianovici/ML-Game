@@ -6,7 +6,7 @@ class TrailTile extends Sprite {
 			width: 512,
 			height: 40,
 			origin: {x: 0, y: 218},
-			initialPosition: {
+			pos: {
 				x,
 				y: 210
 			}

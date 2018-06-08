@@ -8,11 +8,8 @@ class Sprite {
 		me.width = options.width;
 		me.height = options.height;
 
-		me.cPos = options.initialPosition;
+		me.cPos = options.pos;
 		me.lPos = {};
-		me.initPos = {};
-		me.initPos.x = me.cPos.x;
-		me.initPos.y = me.cPos.y;
 		me.lPos.x = me.cPos.x;
 		me.lPos.y = me.cPos.y;
 	}

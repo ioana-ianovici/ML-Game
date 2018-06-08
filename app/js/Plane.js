@@ -6,7 +6,7 @@ class Plane extends Sprite {
 			width: 100,
 			height: 40,
 			origin: {x: 0, y: 88},
-			initialPosition: {
+			pos: {
 				x,
 				y: 132
 			}

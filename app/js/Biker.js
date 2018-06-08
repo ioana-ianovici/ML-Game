@@ -5,7 +5,7 @@ class Biker extends Sprite_dynamic {
 			imageSrc: "app/img/biker_004.png",
 			width: 100,
 			height: 100,
-			initialPosition: {
+			pos: {
 				x: 0,
 				y: 135
 			}

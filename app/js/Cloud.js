@@ -6,7 +6,7 @@ class Cloud extends Sprite {
 			width: 128,
 			height: 64,
 			origin: {x: 0, y: 24},
-			initialPosition: {
+			pos: {
 				x,
 				y: h
 			}
