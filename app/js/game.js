@@ -4,52 +4,41 @@ class GameRunner {
 		me.currentSpeed = 4;
 		me.points = 0;
 		me.acceleration = 0.001;
+
 		me.background = new Background();
 		me.obstacles = new Obstacles();
 		me.biker = new Biker();
-		me.startEventHandler();
+		me.addStartHandler();
 	}
 
 	start() {
 		let me = this;
 		if (!me.isRunning) {
 			me.isRunning = true;
-			me.startEventHandler();
 			me.gameOverHandler();
 			me.moveObstacles();
 		}
 	}
 
-
 	gameOverHandler(){
 		let me = this;
-		let handlerFunc = function (e) {
+		let handler = function (e) {
 			if (e.keyCode === 81) {
 				me.gameOver();
 			}
 		};
-		me.GOHandler = handlerFunc.bind(me);
-		window.addEventListener('keydown', me.GOHandler)
+		handler.bind(me);
+		window.addEventListener('keydown', handler)
 	}
 
-	startEventHandler() {
+	addStartHandler(){
 		let me = this;
-		let handlerFunc = function (e) {
-			if (e.keyCode === 32 || e.keyCode === 38 || e.type === 'touchstart') {
-				me.start()
-			}
+		let handler = function (){
+			me.start();
 		};
-		if (!me.handler){
-			me.handler = handlerFunc.bind(me);
-		}
-
-		if (!me.isRunning) {
-			window.addEventListener('keydown', me.handler);
-			window.addEventListener('touchstart', me.handler);
-		} else {
-			window.removeEventListener('keydown', me.handler);
-			window.removeEventListener('touchstart', me.handler);
-		}
+		handler.bind(me);
+		window.addEventListener('keydown', handler);
+		window.addEventListener('touchstart', handler);
 	}
 
 	moveObstacles() {
@@ -57,6 +46,7 @@ class GameRunner {
 
 		me.points++;
 		me.currentSpeed += me.acceleration;
+
 		me.background.move(me.currentSpeed);
 		me.obstacles.move(me.currentSpeed);
 
