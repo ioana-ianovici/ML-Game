@@ -3,10 +3,6 @@ class Obstacles {
 		let me = this;
 		me.lastObstaclePosition = 0;
 		me.generateObstacles();
-
-		window.addEventListener("load", function () {
-			me.reDraw();
-		});
 	}
 
 	generateObstacles() {
@@ -27,7 +23,6 @@ class Obstacles {
 
 		me.lastObstaclePosition = me[obstacleName].cPos.x;
 	}
-
 
 	move(distance) {
 		let me = this;

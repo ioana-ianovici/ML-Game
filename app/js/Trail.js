@@ -5,10 +5,6 @@ class Trail {
 		me.tile_1 = new TrailTile(0);
 		me.tile_2 = new TrailTile(me.width);
 		me.tile_3 = new TrailTile(2 * me.width);
-
-		window.addEventListener("load", function () {
-			me.reDraw();
-		});
 	}
 
 	move(distance){

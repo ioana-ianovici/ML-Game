@@ -1,64 +1,107 @@
 class GameRunner {
 	constructor() {
 		let me = this;
+		me.currentStatus = 'idle';
 		me.currentSpeed = 4;
 		me.points = 0;
 		me.acceleration = 0.001;
 
-		me.background = new Background();
+		this.trail = new Trail();
+		this.sky = new Sky();
 		me.obstacles = new Obstacles();
 		me.biker = new Biker();
-		me.addStartHandler();
+		me.loadElements();
+		me.addHandlers();
 	}
 
-	start() {
+	loadElements() {
 		let me = this;
-		if (!me.isRunning) {
-			me.isRunning = true;
-			me.gameOverHandler();
-			me.moveObstacles();
+		window.addEventListener("load", function () {
+			me.sky.move();
+			me.obstacles.reDraw();
+			me.trail.reDraw();
+			me.biker.draw();
+			me.biker.reDraw();
+		});
+	}
+
+	processHandlers(e) {
+
+		if (e.repeat) {
+			return
 		}
-	}
-
-	gameOverHandler(){
 		let me = this;
-		let handler = function (e) {
-			if (e.keyCode === 81) {
-				me.gameOver();
+		// console.log(e.keyCode);
+		if (e.type === 'keydown') {
+			e.preventDefault();
+			switch (e.keyCode) {
+				case 38:
+					if (me.currentStatus === 'idle') {
+						me.run();
+					}
+					me.biker.jump();
+					break;
+				case 32:
+					if (me.currentStatus === 'idle') {
+						me.run();
+					}
+					me.biker.jump();
+					break;
+				case 81:
+					me.biker.crashDown();
+					me.gameOver();
+					break;
+				case 87:
+					me.biker.crashUp();
+					me.gameOver();
+					break;
+				case 40:
+					me.biker.duck();
+					break;
+				case 66:
+					me.biker.ride();
 			}
-		};
-		handler.bind(me);
-		window.addEventListener('keydown', handler)
+		} else if (e.type === 'keyup') {
+			if (e.keyCode === 38 || e.keyCode === 32) {
+				if (me.currentStatus === 'crash') {
+					me.run();
+				}
+			}
+		} else if (e.type === 'touchstart') {
+			if (me.currentStatus === 'idle') {
+				me.run();
+			}
+			me.biker.jump();
+		}
+
 	}
 
-	addStartHandler(){
-		let me = this;
-		let handler = function (){
-			me.start();
-		};
-		handler.bind(me);
+	addHandlers() {
+		let handler = this.processHandlers.bind(this);
 		window.addEventListener('keydown', handler);
+		window.addEventListener('keyup', handler);
 		window.addEventListener('touchstart', handler);
 	}
 
-	moveObstacles() {
+	run() {
 		let me = this;
-
+		me.currentStatus = 'running';
 		me.points++;
 		me.currentSpeed += me.acceleration;
 
-		me.background.move(me.currentSpeed);
+		me.trail.move(me.currentSpeed);
 		me.obstacles.move(me.currentSpeed);
 
 		me.animID = window.requestAnimationFrame(function () {
-			me.moveObstacles();
+			me.run();
 		});
 	}
 
 	gameOver() {
+		let me = this;
+		me.currentStatus = 'crash';
 		console.log('game over');
 		window.cancelAnimationFrame(this.animID);
-		this.biker.animate('crash');
 	}
 }
 

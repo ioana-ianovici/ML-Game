@@ -3,10 +3,6 @@ class Sky {
 		let me = this;
 		me.cloudsNumber = 5;
 		me.generateClouds();
-
-		window.addEventListener("load", function () {
-			me.reDraw();
-		});
 	}
 
 	generateClouds() {
@@ -29,6 +25,8 @@ class Sky {
 		}
 
 		me.reDraw();
+		let cbk = me.move.bind(me);
+		window.requestAnimationFrame(cbk);
 	}
 
 	reDraw() {
