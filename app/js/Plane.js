@@ -13,7 +13,7 @@ class Plane extends Sprite {
 		});
 
 		let me = this;
-		me.framesNum = 2;
+		me.frameNum = 2;
 		me.frameIndex = 0;
 		me.tpf = 10;
 		me.tick = 0;
@@ -31,7 +31,7 @@ class Plane extends Sprite {
 
 	switchFrame() {
 		let me = this;
-		me.frameIndex = me.frameIndex >= me.framesNum - 1 ? 0 : me.frameIndex + 1;
+		me.frameIndex = me.frameIndex >= me.frameNum - 1 ? 0 : me.frameIndex + 1;
 		me.origin.x = me.frameIndex * me.width;
 	}
 }

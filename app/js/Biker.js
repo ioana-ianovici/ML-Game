@@ -12,122 +12,81 @@ class Biker extends Sprite {
 			}
 		});
 		let me = this;
-		me.action = 'idle';
-		me.nextAction = 'idle';
-		me.framesNum = 1;
-		me.frameIndex = 0;
-		me.frameRow = 0;
-		me.tpf = 100;
+		me.setProps('idle');
+	}
+
+	setProps(action){
+		let me = this;
+		let setting = animations[action];
+		me.action = action;
+		me.nextAction = setting.nextAction;
+		me.frameRow = setting.frameRow;
+		me.frameSequence = setting.frameSequence;
+		me.frameNum = setting.frameSequence.length;
+		me.tpf = setting.tpf;
+		me.frameIndex = me.frameSequence[0];
 		me.tick = 0;
 	}
 
 	ride() {
-		console.log('ride');
 		let me = this;
 		if (me.action !== 'ride') {
-			me.action = 'ride';
-			me.nextAction = null;
-			me.framesNum = 8;
-			me.frameIndex = 0;
-			me.frameRow = 0;
-			me.tpf = 4;
-			me.tick = 0;
+			me.setProps('ride');
 		}
 	}
 
 	jump() {
-		console.log('jump');
 		let me = this;
 		if (me.action !== 'jump') {
-			me.action = 'jump';
-			me.nextAction = 'ride';
-			me.framesNum = 4;
-			me.frameIndex = 0;
-			me.frameRow = 4;
-			me.tpf = 7;
-			me.tick = 0;
+			me.setProps('jump')
 		}
 	}
 
 	duck() {
-		console.log('duck');
 		let me = this;
 		if (me.action !== 'duck') {
-			me.action = 'duck';
-			me.nextAction = 'ride';
-			me.framesNum = 2;
-			me.tpf = 4;
-			me.frameRow = 1;
-			me.frameIndex = 0;
-			me.tick = 0;
+			me.setProps('duck')
 		}
 	}
 
 	unduck() {
-		console.log('unduck');
 		let me = this;
 		if (me.action !== 'unduck') {
-			me.action = 'unduck';
-			me.framesNum = 2;
-			me.tpf = 4;
-			me.frameRow = 1;
-			me.frameIndex = 0;
-			me.tick = 0;
+			me.setProps('unduck')
 		}
 	}
 
 	ducking() {
-		console.log('ducking');
 		let me = this;
 		if (me.action !== 'ducking') {
-			me.action = 'ducking';
-			me.framesNum = 6;
-			me.tpf = 4;
-			me.frameRow = 1;
-			me.frameIndex = 0;
-			me.tick = 0;
+			me.setProps('ducking')
 		}
 	}
 
 	crashDown() {
-		console.log('crash down');
 		let me = this;
 		if (me.action !== 'crashDown') {
-			me.action = 'crashDown';
-			me.nextAction = 'lastFrame';
-			me.framesNum = 9;
-			me.tpf = 5;
-			me.frameRow = 3;
-			me.frameIndex = 0;
-			me.tick = 0;
+			me.setProps('crashDown')
 		}
 	}
 
 	crashUp() {
-		console.log('crash up');
 		let me = this;
 		if (me.action !== 'crashUp') {
-			me.action = 'crashUp';
-			me.nextAction = 'lastFrame';
-			me.framesNum = 8;
-			me.tpf = 5;
-			me.frameRow = 2;
-			me.frameIndex = 0;
-			me.tick = 0;
+			me.setProps('crashUp')
 		}
 	}
 
-	lastFrame(){
-		console.log('last frame');
+	lastFrame() {
 		let me = this;
-		me.frameIndex = me.framesNum -1;
+		me.frameIndex = me.frameNum - 1;
 		me.tpf = Infinity;
 		me.tick = 0;
 	}
 
-	doNextAction(){
+	doNextAction() {
 		let me = this;
-		switch (me.nextAction){
+		switch (me.nextAction) {
 			case 'ride':
 				me.ride();
 				break;
@@ -149,6 +108,7 @@ class Biker extends Sprite {
 		let me = this;
 		me.tick++;
 		if (me.tick >= me.tpf) {
+			console.log('frame:', me.frameIndex);
 			me.tick = 0;
 			me.switchFrame();
 			me.canvas.getContext('2d').clearRect(0, 0, me.canvas.width, me.canvas.height);
@@ -161,11 +121,11 @@ class Biker extends Sprite {
 
 	switchFrame() {
 		let me = this;
-		if (me.nextAction && me.frameIndex === me.framesNum - 1){
-		    me.doNextAction();
-		    return;
+		if (me.nextAction && me.frameIndex === me.frameNum - 1) {
+			me.doNextAction();
+			return;
 		}
-		me.frameIndex = me.frameIndex >= me.framesNum - 1 ? 0 : me.frameIndex + 1;
+		me.frameIndex = me.frameIndex >= me.frameNum - 1 ? 0 : me.frameIndex + 1;
 		me.origin.x = me.frameIndex * me.width;
 		me.origin.y = me.frameRow * me.height;
 	}

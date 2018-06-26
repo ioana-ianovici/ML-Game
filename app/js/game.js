@@ -66,6 +66,8 @@ class GameRunner {
 				if (me.currentStatus === 'crash') {
 					me.run();
 				}
+			} else if (e.keyCode === 40){
+				me.biker.ride();
 			}
 		} else if (e.type === 'touchstart') {
 			if (me.currentStatus === 'idle') {
@@ -100,7 +102,6 @@ class GameRunner {
 	gameOver() {
 		let me = this;
 		me.currentStatus = 'crash';
-		console.log('game over');
 		window.cancelAnimationFrame(this.animID);
 	}
 }
