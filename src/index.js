@@ -1,2 +1,6 @@
-console.log('buna seara');
-console.log('vezi ca ploua');
+import {animationFix} from './js/globalFunctions'
+import GameRunner from './js/game'
+
+animationFix();
+
+new GameRunner();

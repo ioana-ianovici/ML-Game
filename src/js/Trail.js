@@ -1,4 +1,6 @@
-class Trail {
+import TrailTile from './TrailTile'
+
+export default class Trail {
 	constructor() {
 		let me = this;
 		me.width = 512;

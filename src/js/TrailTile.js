@@ -1,4 +1,6 @@
-class TrailTile extends Sprite {
+import Sprite from './Sprite'
+
+export default class TrailTile extends Sprite {
 	constructor(x) {
 		super({
 			canvas: document.getElementById("background-layer"),

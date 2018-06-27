@@ -1,4 +1,8 @@
-class Obstacles {
+import {randomNumber, probability} from "./globalFunctions";
+import Rock from './Rock'
+import Plane from './Plane'
+
+export default class Obstacles {
 	constructor() {
 		let me = this;
 		me.lastObstaclePosition = 0;

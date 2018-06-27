@@ -1,8 +1,11 @@
-class Biker extends Sprite {
+import {animations} from "./BikerAnimations";
+import Sprite from './Sprite'
+
+export default class Biker extends Sprite {
 	constructor() {
 		super({
 			canvas: document.getElementById("biker-layer"),
-			imageSrc: "app/img/biker_004.png",
+			imageSrc: "src/img/biker_004.png",
 			width: 100,
 			height: 100,
 			origin: {x: 0, y: 0},
@@ -15,10 +18,10 @@ class Biker extends Sprite {
 		me.setProps('idle');
 	}
 
-	setProps(action){
+	setProps(action) {
 		let me = this;
 		let setting = animations[action];
-		if (me.action !== action){
+		if (me.action !== action) {
 			me.action = action;
 			me.nextAction = setting.nextAction;
 			me.frameRow = setting.frameRow;

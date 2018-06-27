@@ -1,4 +1,4 @@
-class Sprite {
+export default class Sprite {
 	constructor(options) {
 		let me = this;
 		me.canvas = options.canvas;

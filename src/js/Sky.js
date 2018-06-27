@@ -1,4 +1,7 @@
-class Sky {
+import Cloud from './Cloud'
+import {randomNumber} from './globalFunctions'
+
+export default class Sky {
 	constructor() {
 		let me = this;
 		me.cloudsNumber = 5;

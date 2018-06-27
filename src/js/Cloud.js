@@ -1,8 +1,10 @@
-class Cloud extends Sprite {
+import Sprite from './Sprite'
+
+export default class Cloud extends Sprite {
 	constructor(x, h, s) {
 		super({
 			canvas: document.getElementById("background-layer"),
-			imageSrc: "app/img/environment_sheet.png",
+			imageSrc: "src/img/environment_sheet.png",
 			width: 128,
 			height: 64,
 			origin: {x: 0, y: 24},

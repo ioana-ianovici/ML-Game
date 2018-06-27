@@ -1,4 +1,4 @@
-const animations = {
+export const animations = {
 	idle: {
 		nextAction: 'idle',
 		frameRow: 0,
