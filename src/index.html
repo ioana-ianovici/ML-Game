@@ -3,6 +3,7 @@
 
 <head>
     <title>ML Game</title>
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'">
 	<link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
 </head>
 
@@ -17,10 +18,7 @@
     </div>
     <div class="stats-area">STATS WILL BE HERE</div>
 
-
     <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
-
-
 
 </body>
 
