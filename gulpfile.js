@@ -26,8 +26,7 @@ gulp.task('scripts', function () {
 		'app/js/Obstacles.js',
 		'app/js/Trail.js',
 		'app/js/Sky.js',
-		'app/js/Background.js',
-		'app/js/Sprite_dynamic.js',
+		'app/js/BikerAnimations.js',
 		'app/js/Biker.js',
 		'app/js/game.js'
 	])
@@ -57,4 +56,4 @@ gulp.task("uglify", function () {
 
 gulp.task('default', ['scripts', 'uglify']);
 
-gulp.task('release', ['script-uglify', 'css']);
+gulp.task('release', ['default', 'css']);

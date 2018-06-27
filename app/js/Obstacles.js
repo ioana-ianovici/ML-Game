@@ -14,11 +14,12 @@ class Obstacles {
 
 	createObstacle(obstacleName) {
 		let me = this;
+		const lastPos = me.lastObstaclePosition;
 
 		if (probability(70)) {
-			me[obstacleName] = new Rock(randomNumber(me.lastObstaclePosition + 500, me.lastObstaclePosition + 1000), randomNumber(1, 2));
+			me[obstacleName] = new Rock(randomNumber(lastPos + 500, lastPos + 1000), randomNumber(1, 2));
 		} else {
-			me[obstacleName] = new Plane(randomNumber(me.lastObstaclePosition + 500, me.lastObstaclePosition + 1000));
+			me[obstacleName] = new Plane(randomNumber(lastPos + 500, lastPos + 1000));
 		}
 
 		me.lastObstaclePosition = me[obstacleName].cPos.x;

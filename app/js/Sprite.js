@@ -15,7 +15,6 @@ class Sprite {
 		let me = this,
 				context = me.canvas.getContext('2d');
 
-		// draw the image on the new position
 		context.drawImage(
 				me.image,
 				me.origin.x,

@@ -1,10 +1,9 @@
 class Rock extends Sprite {
 	constructor(pos, type) {
+		let originX = 0;
 
 		if (type === 2) {
-			type = 100
-		} else {
-			type = 0
+			originX = 100
 		}
 
 		super({
@@ -12,7 +11,7 @@ class Rock extends Sprite {
 			imageSrc: "app/img/environment_sheet.png",
 			width: 100,
 			height: 90,
-			origin: {x: type, y: 128},
+			origin: {x: originX, y: 128},
 			pos: {
 				x: pos,
 				y: 175
