@@ -18,63 +18,44 @@ class Biker extends Sprite {
 	setProps(action){
 		let me = this;
 		let setting = animations[action];
-		me.action = action;
-		me.nextAction = setting.nextAction;
-		me.frameRow = setting.frameRow;
-		me.frameSequence = setting.frameSequence;
-		me.frameNum = setting.frameSequence.length;
-		me.tpf = setting.tpf;
-		me.frameIndex = me.frameSequence[0];
-		me.tick = 0;
+		if (me.action !== action){
+			me.action = action;
+			me.nextAction = setting.nextAction;
+			me.frameRow = setting.frameRow;
+			me.frameSequence = setting.frameSequence;
+			me.frameNum = setting.frameSequence.length;
+			me.tpf = setting.tpf;
+			me.frameIndex = me.frameSequence[0];
+			me.tick = 0;
+		}
 	}
 
 	ride() {
-		let me = this;
-		if (me.action !== 'ride') {
-			me.setProps('ride');
-		}
+		this.setProps('ride');
 	}
 
 	jump() {
-		let me = this;
-		if (me.action !== 'jump') {
-			me.setProps('jump')
-		}
+		this.setProps('jump');
 	}
 
 	duck() {
-		let me = this;
-		if (me.action !== 'duck') {
-			me.setProps('duck')
-		}
+		this.setProps('duck');
 	}
 
 	unduck() {
-		let me = this;
-		if (me.action !== 'unduck') {
-			me.setProps('unduck')
-		}
+		this.setProps('unduck');
 	}
 
 	ducking() {
-		let me = this;
-		if (me.action !== 'ducking') {
-			me.setProps('ducking')
-		}
+		this.setProps('ducking');
 	}
 
 	crashDown() {
-		let me = this;
-		if (me.action !== 'crashDown') {
-			me.setProps('crashDown')
-		}
+		this.setProps('crashDown');
 	}
 
 	crashUp() {
-		let me = this;
-		if (me.action !== 'crashUp') {
-			me.setProps('crashUp')
-		}
+		this.setProps('crashUp');
 	}
 
 	lastFrame() {
@@ -88,16 +69,19 @@ class Biker extends Sprite {
 		let me = this;
 		switch (me.nextAction) {
 			case 'ride':
-				me.ride();
+				this.setProps('ride');
 				break;
 			case 'jump':
-				me.jump();
+				this.setProps('jump');
 				break;
 			case 'duck':
-				me.duck();
+				this.setProps('duck');
+				break;
+			case 'unduck':
+				this.setProps('unduck');
 				break;
 			case 'ducking':
-				me.ducking();
+				this.setProps('ducking');
 				break;
 			case 'lastFrame':
 				me.lastFrame();

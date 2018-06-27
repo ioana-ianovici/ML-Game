@@ -3,7 +3,7 @@ const animations = {
 		nextAction: 'idle',
 		frameRow: 0,
 		frameSequence: [0],
-		tpf: 400
+		tpf: Infinity
 	},
 	ride: {
 		nextAction: null,
@@ -21,16 +21,16 @@ const animations = {
 		nextAction: 'ducking',
 		frameRow: 1,
 		frameSequence: [0, 1],
-		tpf: 4
+		tpf: 40
 	},
 	unduck: {
 		nextAction: 'ride',
 		frameRow: 1,
 		frameSequence: [6, 7],
-		tpf: 4
+		tpf: 40
 	},
 	ducking: {
-		nextAction: 'duck',
+		nextAction: 'ducking',
 		frameRow: 1,
 		frameSequence: [2, 3, 4, 5],
 		tpf: 4
