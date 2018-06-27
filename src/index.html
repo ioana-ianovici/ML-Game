@@ -5,6 +5,7 @@
     <title>ML Game</title>
     <!--<link rel="stylesheet" type="text/css" href="src/css/default.css">-->
     <!--<link rel="stylesheet" type="text/css" href="src/css/game.css">-->
+	<link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
 </head>
 
 <body>
@@ -18,6 +19,8 @@
     </div>
     <div class="stats-area">STATS WILL BE HERE</div>
 
+
+    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 
     <!--<script src="src/js/globalFunctions.js"></script>-->
 
