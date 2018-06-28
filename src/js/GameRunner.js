@@ -36,9 +36,9 @@ export default class GameRunner {
 			return
 		}
 		let me = this;
-		// console.log(e.keyCode);
 		if (e.type === 'keydown') {
 			e.preventDefault();
+			// console.log(e.type, e.keyCode);
 			switch (e.keyCode) {
 				case 38:
 					if (me.currentStatus === 'idle') {

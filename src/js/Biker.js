@@ -96,7 +96,6 @@ export default class Biker extends Sprite {
 		let me = this;
 		me.tick++;
 		if (me.tick >= me.tpf) {
-			console.log('frame:', me.frameIndex);
 			me.tick = 0;
 			me.switchFrame();
 			me.canvas.getContext('2d').clearRect(0, 0, me.canvas.width, me.canvas.height);
