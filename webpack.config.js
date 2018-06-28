@@ -2,6 +2,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CspHtmlWebpackPlugin = require('csp-html-webpack-plugin');
 
 module.exports = {
 	entry: {main: './src/index.js'},
@@ -31,6 +32,7 @@ module.exports = {
 			hash: true,
 			template: './src/index.html',
 			filename: 'index.html'
-		})
+		}),
+		new CspHtmlWebpackPlugin()
 	]
 };
