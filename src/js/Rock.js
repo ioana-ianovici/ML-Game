@@ -8,7 +8,6 @@ export default class Rock extends Sprite {
 		if (type === 2) {
 			originX = 100
 		}
-		console.log(img);
 
 		super({
 			canvas: document.getElementById("obstacle-layer"),
