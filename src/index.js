@@ -1,10 +1,7 @@
 import './css/main.css'
-// import {animationFix} from './js/globalFunctions'
-// import GameRunner from './js/game'
-//
-// animationFix();
-//
-// new GameRunner();
+import {animationFix} from './js/globalFunctions'
+import GameRunner from './js/game'
 
-console.log('hello webpack');
-console.log('hello boss!');
+animationFix();
+
+new GameRunner();

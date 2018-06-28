@@ -1,4 +1,4 @@
-// import img from '../img/biker_004.png'
+import img from '../img/biker_004.png'
 import {animations} from "./BikerAnimations";
 import Sprite from './Sprite'
 

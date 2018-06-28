@@ -26,7 +26,17 @@ module.exports = {
 					MiniCssExtractPlugin.loader,
 					'css-loader'
 				]
-			}]
+			},
+			{
+				test: /\.(png|jpg|gif)$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {}
+					}
+				]
+			}
+		]
 	},
 	plugins: [
 		new CleanWebpackPlugin('dist', {}),
