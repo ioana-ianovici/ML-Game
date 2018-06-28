@@ -1,4 +1,4 @@
-import img from '../img/environment_sheet.png'
+// import img from '../img/environment_sheet.png'
 import Sprite from './Sprite'
 
 export default class TrailTile extends Sprite {
