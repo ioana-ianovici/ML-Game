@@ -7,4 +7,4 @@ import './css/main.css'
 // new GameRunner();
 
 console.log('hello webpack');
-console.log('hello boss');
+console.log('hello boss!');

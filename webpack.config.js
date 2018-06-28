@@ -1,31 +1,37 @@
 // webpack v4
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CspHtmlWebpackPlugin = require('csp-html-webpack-plugin');
+const WebpackMd5Hash = require('webpack-md5-hash');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
 	entry: {main: './src/index.js'},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: '[name][chunkhash].js'
+		filename: '[name][hash].js'
+	},
+	devtool: 'inline-source-map',
+	devServer: {
+		contentBase: './dist',
+		open: true
 	},
 	module: {
 		rules: [
 			{
 				test: /\.css$/,
-				use: ExtractTextPlugin.extract(
-						{
-							fallback: 'style-loader',
-							use: ['css-loader']
-						})
+				use: [
+					'style-loader',
+					MiniCssExtractPlugin.loader,
+					'css-loader'
+				]
 			}]
 	},
 	plugins: [
-		new ExtractTextPlugin({
-			filename: 'style.[chunkhash].css',
-			disable: false,
-			allChunks: true
+		new CleanWebpackPlugin('dist', {}),
+		new MiniCssExtractPlugin({
+			filename: 'style.[contenthash].css'
 		}),
 		new HtmlWebpackPlugin({
 			inject: false,
@@ -33,6 +39,7 @@ module.exports = {
 			template: './src/index.html',
 			filename: 'index.html'
 		}),
-		new CspHtmlWebpackPlugin()
+		new CspHtmlWebpackPlugin(),
+		new WebpackMd5Hash()
 	]
 };
