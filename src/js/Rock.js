@@ -1,3 +1,4 @@
+import img from '../img/environment_sheet.png'
 import Sprite from './Sprite'
 
 export default class Rock extends Sprite {
@@ -7,10 +8,11 @@ export default class Rock extends Sprite {
 		if (type === 2) {
 			originX = 100
 		}
+		console.log(img);
 
 		super({
 			canvas: document.getElementById("obstacle-layer"),
-			imageSrc: "src/img/environment_sheet.png",
+			imageSrc: img,
 			width: 100,
 			height: 90,
 			origin: {x: originX, y: 128},

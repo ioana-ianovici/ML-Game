@@ -1,10 +1,11 @@
+import img from '../img/environment_sheet.png'
 import Sprite from './Sprite'
 
 export default class Plane extends Sprite {
 	constructor(x) {
 		super({
-			canvas: document.getElementById("background-layer"),
-			imageSrc: "src/img/environment_sheet.png",
+			canvas: document.getElementById("obstacle-layer"),
+			imageSrc: img,
 			width: 100,
 			height: 40,
 			origin: {x: 0, y: 88},

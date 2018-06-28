@@ -7,7 +7,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
-	entry: {main: './src/index.js'},
+	entry: { main: './src/index.js' },
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].[hash].js'
@@ -37,7 +37,7 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.(png|svg|jpg|gif)$/,
+				test: /\.(png|jpg|gif)$/,
 				use: [
 					'file-loader'
 				]
