@@ -4,8 +4,7 @@ import GameRunner from './js/GameRunner'
 
 animationFix();
 
-new GameRunner();
-
+window.game = new GameRunner();
 
 
 //todo: untill game is not started to be unable to make any other moves

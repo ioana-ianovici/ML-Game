@@ -72,7 +72,7 @@ export default class GameRunner {
 					me.run();
 				}
 			} else if (e.keyCode === 40){
-				me.biker.ride();
+				me.biker.unduck();
 			}
 		} else if (e.type === 'touchstart') {
 			if (me.currentStatus === 'idle') {

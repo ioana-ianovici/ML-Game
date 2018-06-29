@@ -14,7 +14,7 @@ export const animations = {
 	jump: {
 		nextAction: 'ride',
 		frameRow: 4,
-		frameSequence: [0, 1, 2, 3],
+		frameSequence: [0, 1, 1, 2, 2, 3],
 		tpf: 7
 	},
 	duck: {
@@ -27,12 +27,12 @@ export const animations = {
 		nextAction: 'ride',
 		frameRow: 1,
 		frameSequence: [6, 7],
-		tpf: 40
+		tpf: 4
 	},
 	ducking: {
-		nextAction: 'ducking',
+		nextAction: null,
 		frameRow: 1,
-		frameSequence: [2, 3, 4, 5],
+		frameSequence: [1, 2, 3, 4, 5, 6],
 		tpf: 4
 	},
 	crashDown: {

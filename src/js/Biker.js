@@ -31,6 +31,7 @@ export default class Biker extends Sprite {
 			me.tpf = setting.tpf;
 			me.frameIndex = me.frameSequence[0];
 			me.tick = 0;
+			me.switchFrame(1);
 		}
 	}
 
@@ -98,22 +99,28 @@ export default class Biker extends Sprite {
 		if (me.tick >= me.tpf) {
 			me.tick = 0;
 			me.switchFrame();
-			me.canvas.getContext('2d').clearRect(0, 0, me.canvas.width, me.canvas.height);
-			me.draw();
 		}
 
 		let cbk = me.reDraw.bind(me);
 		window.requestAnimationFrame(cbk);
 	}
 
-	switchFrame() {
+	switchFrame(set) {
 		let me = this;
-		if (me.nextAction && me.frameIndex === me.frameNum - 1) {
-			me.doNextAction();
-			return;
+		if (set){
+			me.origin.x = me.frameSequence[0] * me.width;
+			me.origin.y = me.frameRow * me.height;
+		} else {
+			if (me.nextAction && me.frameIndex === me.frameNum - 1) {
+				me.doNextAction();
+				return;
+			}
+			me.frameIndex = me.frameIndex >= me.frameNum - 1 ? 0 : me.frameIndex + 1;
+			me.origin.x = me.frameSequence[me.frameIndex] * me.width;
+			me.origin.y = me.frameRow * me.height;
 		}
-		me.frameIndex = me.frameIndex >= me.frameNum - 1 ? 0 : me.frameIndex + 1;
-		me.origin.x = me.frameIndex * me.width;
-		me.origin.y = me.frameRow * me.height;
+		console.log(me.origin.x, me.origin.y);
+		me.canvas.getContext('2d').clearRect(0, 0, me.canvas.width, me.canvas.height);
+		me.draw();
 	}
 }
