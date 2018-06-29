@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ML Game</title>
+	<meta http-equiv="Content-Security-Policy" content="">
+	<link rel="stylesheet" href="<%=htmlWebpackPlugin.files.chunks.main.css %>">
+</head>
+
+<body>
+    <h1 class="page-title">ML Game</h1>
+    <div class="game-area">
+        <div id="game-container">
+            <canvas id="biker-layer" width="1000" height="250" class="layer"></canvas>
+            <canvas id="obstacle-layer" width="1000" height="250" class="layer"></canvas>
+            <canvas id="background-layer" width="1000" height="250" class="layer"></canvas>
+        </div>
+    </div>
+    <div class="stats-area">STATS WILL BE HERE</div>
+
+    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+
+</body>
+
+</html>

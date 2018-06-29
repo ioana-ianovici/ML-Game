@@ -1,4 +1,7 @@
-class Rock extends Sprite {
+import img from '../img/environment_sheet.png'
+import Sprite from './Sprite'
+
+export default class Rock extends Sprite {
 	constructor(pos, type) {
 		let originX = 0;
 
@@ -8,7 +11,7 @@ class Rock extends Sprite {
 
 		super({
 			canvas: document.getElementById("obstacle-layer"),
-			imageSrc: "app/img/environment_sheet.png",
+			imageSrc: img,
 			width: 100,
 			height: 90,
 			origin: {x: originX, y: 128},

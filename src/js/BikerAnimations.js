@@ -1,4 +1,4 @@
-const animations = {
+export const animations = {
 	idle: {
 		nextAction: 'idle',
 		frameRow: 0,
@@ -21,7 +21,7 @@ const animations = {
 		nextAction: 'ducking',
 		frameRow: 1,
 		frameSequence: [0, 1],
-		tpf: 40
+		tpf: 4
 	},
 	unduck: {
 		nextAction: 'ride',

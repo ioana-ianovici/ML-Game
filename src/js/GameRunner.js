@@ -1,4 +1,9 @@
-class GameRunner {
+import Trail from './Trail'
+import Sky from './Sky'
+import Biker from './Biker'
+import Obstacles from './Obstacles'
+
+export default class GameRunner {
 	constructor() {
 		let me = this;
 		me.currentStatus = 'idle';
@@ -31,9 +36,9 @@ class GameRunner {
 			return
 		}
 		let me = this;
-		// console.log(e.keyCode);
 		if (e.type === 'keydown') {
 			e.preventDefault();
+			// console.log(e.type, e.keyCode);
 			switch (e.keyCode) {
 				case 38:
 					if (me.currentStatus === 'idle') {
@@ -105,5 +110,3 @@ class GameRunner {
 		window.cancelAnimationFrame(this.animID);
 	}
 }
-
-let game = new GameRunner();
