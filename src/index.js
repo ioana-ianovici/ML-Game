@@ -10,4 +10,3 @@ new GameRunner();
 
 //todo: untill game is not started to be unable to make any other moves
 //todo: planes should move relative to the ground, and keep moving out of the view when game is over
-//todo: clouds should move any direction, untill game is started, and start moving left when biker is moving
