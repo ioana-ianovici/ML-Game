@@ -122,7 +122,7 @@ export default class Biker extends Sprite {
 				me.origin.x = me.frameSequence[3] * me.width;
 				me.frameIndex = me.frameNum - 1;
 			}
-			console.log(me.groundLevel - me.cPos.y);
+			// console.log(me.groundLevel - me.cPos.y);
 		} else {
 			if (set) {
 				me.origin.x = me.frameSequence[0] * me.width;

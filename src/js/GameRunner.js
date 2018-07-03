@@ -74,7 +74,7 @@ export default class GameRunner {
 				if (me.currentStatus === 'crash') {
 					me.startGame();
 				}
-			} else if (e.keyCode === 40) {
+			} else if (e.keyCode === 40 && me.currentStatus === 'running') {
 				me.biker.unduck();
 			}
 		} else if (e.type === 'touchstart') {
