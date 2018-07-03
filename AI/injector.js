@@ -17,7 +17,7 @@
 	}
 
 	function start(){
-		game.run();
+		game.startGame();
 		game.biker.animate('jump');
 	}
 

@@ -42,41 +42,44 @@ export default class GameRunner {
 			switch (e.keyCode) {
 				case 38:
 					if (me.currentStatus === 'idle') {
-						me.run();
+						me.startGame();
 					}
 					me.biker.jump();
 					break;
 				case 32:
 					if (me.currentStatus === 'idle') {
-						me.run();
+						me.startGame();
 					}
 					me.biker.jump();
 					break;
 				case 81:
-					me.biker.crashDown();
-					me.gameOver();
+					if (me.currentStatus === 'running') {
+						me.biker.crashDown();
+						me.gameOver();
+					}
 					break;
 				case 87:
-					me.biker.crashUp();
-					me.gameOver();
+					if (me.currentStatus === 'running') {
+						me.biker.crashUp();
+						me.gameOver();
+					}
 					break;
 				case 40:
-					me.biker.duck();
-					break;
-				case 66:
-					me.biker.ride();
+					if (me.currentStatus === 'running') {
+						me.biker.duck();
+					}
 			}
 		} else if (e.type === 'keyup') {
 			if (e.keyCode === 38 || e.keyCode === 32) {
 				if (me.currentStatus === 'crash') {
-					me.run();
+					me.startGame();
 				}
-			} else if (e.keyCode === 40){
+			} else if (e.keyCode === 40) {
 				me.biker.unduck();
 			}
 		} else if (e.type === 'touchstart') {
 			if (me.currentStatus === 'idle') {
-				me.run();
+				me.startGame();
 			}
 			me.biker.jump();
 		}
@@ -90,7 +93,7 @@ export default class GameRunner {
 		window.addEventListener('touchstart', handler);
 	}
 
-	run() {
+	startGame() {
 		let me = this;
 		me.currentStatus = 'running';
 		me.points++;
@@ -100,7 +103,7 @@ export default class GameRunner {
 		me.obstacles.move(me.currentSpeed);
 
 		me.animID = window.requestAnimationFrame(function () {
-			me.run();
+			me.startGame();
 		});
 	}
 
