@@ -10,12 +10,11 @@ export default class Biker extends Sprite {
 			width: 100,
 			height: 100,
 			origin: {x: 0, y: 0},
-			pos: {
-				x: 0,
-				y: 135
-			}
+			pos: {x: 0, y: 135}
 		});
 		let me = this;
+		me.gravity = 10;
+		me.groundLevel = 135;
 		me.setProps('idle');
 	}
 
@@ -41,6 +40,8 @@ export default class Biker extends Sprite {
 
 	jump() {
 		this.setProps('jump');
+		this.jumping = true;
+		this.verticalVelocity = 27;
 	}
 
 	duck() {
@@ -77,7 +78,7 @@ export default class Biker extends Sprite {
 				this.setProps('ride');
 				break;
 			case 'jump':
-				this.setProps('jump');
+				this.jump();
 				break;
 			case 'duck':
 				this.setProps('duck');
@@ -107,19 +108,35 @@ export default class Biker extends Sprite {
 
 	switchFrame(set) {
 		let me = this;
-		if (set){
-			me.origin.x = me.frameSequence[0] * me.width;
-			me.origin.y = me.frameRow * me.height;
-		} else {
-			if (me.nextAction && me.frameIndex === me.frameNum - 1) {
-				me.doNextAction();
-				return;
+		if (me.jumping) {
+			me.cPos.y = me.cPos.y - me.verticalVelocity;
+			me.verticalVelocity = me.verticalVelocity - me.gravity;
+			me.origin.x = me.frameSequence[1] * me.width;
+			if (me.verticalVelocity < 0) {
+				me.origin.x = me.frameSequence[2] * me.width;
 			}
-			me.frameIndex = me.frameIndex >= me.frameNum - 1 ? 0 : me.frameIndex + 1;
-			me.origin.x = me.frameSequence[me.frameIndex] * me.width;
+			if (me.cPos.y >= me.groundLevel) {
+				me.jumping = false;
+				me.verticalVelocity = 0;
+				me.cPos.y = me.groundLevel;
+				me.origin.x = me.frameSequence[3] * me.width;
+				me.frameIndex = me.frameNum - 1;
+			}
+			console.log(me.groundLevel - me.cPos.y);
+		} else {
+			if (set) {
+				me.origin.x = me.frameSequence[0] * me.width;
+			} else {
+				if (me.nextAction && me.frameIndex === me.frameNum - 1) {
+					me.doNextAction();
+					return;
+				}
+				me.frameIndex = me.frameIndex >= me.frameNum - 1 ? 0 : me.frameIndex + 1;
+				me.origin.x = me.frameSequence[me.frameIndex] * me.width;
+			}
 			me.origin.y = me.frameRow * me.height;
 		}
-		console.log(me.origin.x, me.origin.y);
+		// console.log(me.origin.x, me.origin.y);
 		me.canvas.getContext('2d').clearRect(0, 0, me.canvas.width, me.canvas.height);
 		me.draw();
 	}
