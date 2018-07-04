@@ -39,9 +39,12 @@ export default class Biker extends Sprite {
 	}
 
 	jump() {
-		this.setProps('jump');
-		this.jumping = true;
-		this.verticalVelocity = 27;
+		let me = this;
+		me.setProps('jump');
+		if (!me.jumping){
+			me.jumping = true;
+			me.verticalVelocity = 27;
+		}
 	}
 
 	duck() {
@@ -75,19 +78,19 @@ export default class Biker extends Sprite {
 		let me = this;
 		switch (me.nextAction) {
 			case 'ride':
-				this.setProps('ride');
+				me.setProps('ride');
 				break;
 			case 'jump':
-				this.jump();
+				me.jump();
 				break;
 			case 'duck':
-				this.setProps('duck');
+				me.setProps('duck');
 				break;
 			case 'unduck':
-				this.setProps('unduck');
+				me.setProps('unduck');
 				break;
 			case 'ducking':
-				this.setProps('ducking');
+				me.setProps('ducking');
 				break;
 			case 'lastFrame':
 				me.lastFrame();
@@ -122,11 +125,16 @@ export default class Biker extends Sprite {
 				me.origin.x = me.frameSequence[3] * me.width;
 				me.frameIndex = me.frameNum - 1;
 			}
-			// console.log(me.groundLevel - me.cPos.y);
 		} else {
 			if (set) {
 				me.origin.x = me.frameSequence[0] * me.width;
 			} else {
+				if (me.desiredAction){
+				    me.nextAction = me.desiredAction;
+				    if (me.desiredAction==='jump'){
+					    me.action = 'ride';
+				    }
+				}
 				if (me.nextAction && me.frameIndex === me.frameNum - 1) {
 					me.doNextAction();
 					return;
@@ -136,7 +144,6 @@ export default class Biker extends Sprite {
 			}
 			me.origin.y = me.frameRow * me.height;
 		}
-		// console.log(me.origin.x, me.origin.y);
 		me.canvas.getContext('2d').clearRect(0, 0, me.canvas.width, me.canvas.height);
 		me.draw();
 	}

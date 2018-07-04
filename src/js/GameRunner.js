@@ -2,6 +2,7 @@ import Trail from './Trail'
 import Sky from './Sky'
 import Biker from './Biker'
 import Obstacles from './Obstacles'
+import ScoreDisplay from "./ScoreDisplay";
 
 export default class GameRunner {
 	constructor() {
@@ -11,10 +12,11 @@ export default class GameRunner {
 		me.points = 0;
 		me.acceleration = 0.001;
 
-		this.trail = new Trail();
-		this.sky = new Sky();
+		me.trail = new Trail();
+		me.sky = new Sky();
 		me.obstacles = new Obstacles();
 		me.biker = new Biker();
+		me.score = new ScoreDisplay();
 		me.loadElements();
 		me.addHandlers();
 	}
@@ -27,25 +29,41 @@ export default class GameRunner {
 			me.trail.reDraw();
 			me.biker.draw();
 			me.biker.reDraw();
+			me.score.display();
 		});
 	}
 
 	processHandlers(e) {
+		let me = this;
+
+		if (e.type === 'keydown'){
+			switch (e.keyCode) {
+				case 38:
+				case 32:
+					if (me.biker.jumping){
+						me.biker.desiredAction = 'jump';
+					}
+					break;
+				case 40:
+					if (me.biker.jumping){
+						me.biker.desiredAction = 'duck';
+					}
+			}
+		} else if (e.type === 'keyup'){
+			me.biker.desiredAction = null;
+		}
+
 
 		if (e.repeat) {
 			return
 		}
-		let me = this;
+
+
 		if (e.type === 'keydown') {
 			e.preventDefault();
 			// console.log(e.type, e.keyCode);
 			switch (e.keyCode) {
 				case 38:
-					if (me.currentStatus === 'idle') {
-						me.startGame();
-					}
-					me.biker.jump();
-					break;
 				case 32:
 					if (me.currentStatus === 'idle') {
 						me.startGame();
@@ -65,7 +83,7 @@ export default class GameRunner {
 					}
 					break;
 				case 40:
-					if (me.currentStatus === 'running') {
+					if (me.currentStatus === 'running' && !me.biker.jumping) {
 						me.biker.duck();
 					}
 			}
@@ -74,7 +92,7 @@ export default class GameRunner {
 				if (me.currentStatus === 'crash') {
 					me.startGame();
 				}
-			} else if (e.keyCode === 40 && me.currentStatus === 'running') {
+			} else if (e.keyCode === 40 && me.currentStatus === 'running' && (me.biker.action === 'ducking' || me.biker.action === 'duck')) {
 				me.biker.unduck();
 			}
 		} else if (e.type === 'touchstart') {
@@ -93,17 +111,28 @@ export default class GameRunner {
 		window.addEventListener('touchstart', handler);
 	}
 
-	startGame() {
+	startGame(){
+		let me = this;
+
+		me.currentSpeed = 4;
+		me.points = 0;
+		me.obstacles = new Obstacles();
+		me.runGame();
+	}
+
+	runGame() {
 		let me = this;
 		me.currentStatus = 'running';
 		me.points++;
+		// console.log(me.points);
+		me.score.showScore(parseInt(me.points/10));
 		me.currentSpeed += me.acceleration;
 
 		me.trail.move(me.currentSpeed);
 		me.obstacles.move(me.currentSpeed);
 
 		me.animID = window.requestAnimationFrame(function () {
-			me.startGame();
+			me.runGame();
 		});
 	}
 
