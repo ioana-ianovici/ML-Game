@@ -144,7 +144,7 @@ export default class Biker extends Sprite {
 			}
 			me.origin.y = me.frameRow * me.height;
 		}
-		me.canvas.getContext('2d').clearRect(0, 0, me.canvas.width, me.canvas.height);
+		me.canvas.getContext('2d').clearRect(0, 0, 200, me.canvas.height);
 		me.draw();
 	}
 }

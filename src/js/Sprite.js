@@ -1,3 +1,4 @@
+
 export default class Sprite {
 	constructor(options) {
 		let me = this;

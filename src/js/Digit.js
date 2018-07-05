@@ -5,7 +5,7 @@ export default class Digit extends Sprite {
 	constructor(i) {
 		let width = 23;
 		super({
-			canvas: document.getElementById("background-layer"),
+			canvas: document.getElementById("biker-layer"),
 			imageSrc: img,
 			width,
 			height: 30,

@@ -5,7 +5,7 @@ import Plane from './Plane'
 export default class Obstacles {
 	constructor() {
 		let me = this;
-		me.obstaclesNumber = 5;
+		me.obstaclesNumber = 3;
 		me.generateObstacles();
 	}
 
@@ -18,15 +18,19 @@ export default class Obstacles {
 
 	createObstacle(obstacleName, currentSpeed) {
 		let me = this;
-		const lastPos = me.findLast();
+		let last = me.findLast();
+		const lastPos = last.max;
+		// const lastIsPlane = last.isPlane;
+		console.log(last);
 
 		if (probability(70)) {
 			me[obstacleName] = new Rock(randomNumber(lastPos + 500, lastPos + 1000), randomNumber(1, 2));
 		} else {
-			let speed = randomNumber(1,10)/10;
-			// let pos = (lastPos * speed / currentSpeed);
+			let speed = randomNumber(20,50)/10;
+			let pos = lastPos * (speed + currentSpeed) / currentSpeed;
 			// console.log('==',pos);
-			me[obstacleName] = new Plane(speed, randomNumber(lastPos + 500, lastPos + 1000));
+			// me[obstacleName] = new Plane(speed, randomNumber(pos + 500, pos + 1000));
+			me[obstacleName] = new Plane(speed, pos);
 		}
 	}
 
@@ -52,18 +56,22 @@ export default class Obstacles {
 	}
 
 	findLast(){
-		let array = [];
+		let positions = [];
+		let obstacles = [];
 		for (let i = 1; i <= this.obstaclesNumber; i++) {
 			let obstacleName = 'obstacle_' + i;
 			let pos;
 			try {
-				pos = this[obstacleName].cPos.x
+				pos = this[obstacleName].cPos.x;
+				obstacles.push(this[obstacleName])
 			} catch (e) {
 				pos = 1000
 			}
-			array.push(pos)
+			positions.push(pos)
 		}
-		return Math.max(...array)
+		let max = Math.max(...positions);
+		let isPlane = obstacles.find(el => el.cPos.x === max) instanceof Plane;
+		return {max, isPlane};
 	}
 
 	drawPositions(){
