@@ -2,7 +2,7 @@ import img from '../img/environment_sheet.png'
 import Sprite from './Sprite'
 
 export default class Plane extends Sprite {
-	constructor(s, x) {
+	constructor(x) {
 		super({
 			canvas: document.getElementById("obstacle-layer"),
 			imageSrc: img,
@@ -20,7 +20,7 @@ export default class Plane extends Sprite {
 		me.frameIndex = 0;
 		me.tpf = 10;
 		me.tick = 0;
-		me.speed = s
+		me.speed = 3
 	}
 
 	draw() {

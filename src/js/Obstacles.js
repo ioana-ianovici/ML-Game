@@ -19,18 +19,25 @@ export default class Obstacles {
 	createObstacle(obstacleName, currentSpeed) {
 		let me = this;
 		let last = me.findLast();
-		const lastPos = last.max;
-		// const lastIsPlane = last.isPlane;
-		console.log(last);
+		let lastPos = last.cPos.x;
+		let pos = randomNumber(500, 1000);
+		let planeAhead = last instanceof Plane;
 
 		if (probability(70)) {
-			me[obstacleName] = new Rock(randomNumber(lastPos + 500, lastPos + 1000), randomNumber(1, 2));
+			if (planeAhead){
+				pos += lastPos * currentSpeed / (3 + currentSpeed);
+			} else {
+				pos += lastPos;
+			}
+			pos = pos < lastPos ? lastPos + 1 : pos;
+			me[obstacleName] = new Rock(pos, randomNumber(1, 2));
 		} else {
-			let speed = randomNumber(20,50)/10;
-			let pos = lastPos * (speed + currentSpeed) / currentSpeed;
-			// console.log('==',pos);
-			// me[obstacleName] = new Plane(speed, randomNumber(pos + 500, pos + 1000));
-			me[obstacleName] = new Plane(speed, pos);
+			if (planeAhead){
+			    pos += lastPos;
+			} else {
+				pos += lastPos * (3 + currentSpeed) / currentSpeed; // this formula does not consider the game acceleration
+			}
+			me[obstacleName] = new Plane(pos);
 		}
 	}
 
@@ -44,10 +51,11 @@ export default class Obstacles {
 			if (obstacle.cPos.x < -obstacle.width) {
 				this.createObstacle(obstacleName, distance)
 			} else {
-				if (obstacle instanceof Plane){
+				if (obstacle instanceof Plane) {
 					obstacle.cPos.x = obstacle.cPos.x - distance - obstacle.speed;
 				} else {
-					obstacle.cPos.x = obstacle.cPos.x - distance;}
+					obstacle.cPos.x = obstacle.cPos.x - distance;
+				}
 			}
 
 		}
@@ -55,26 +63,29 @@ export default class Obstacles {
 		me.reDraw();
 	}
 
-	findLast(){
+	findLast() {
+		let me = this;
 		let positions = [];
 		let obstacles = [];
-		for (let i = 1; i <= this.obstaclesNumber; i++) {
+		for (let i = 1; i <= me.obstaclesNumber; i++) {
 			let obstacleName = 'obstacle_' + i;
 			let pos;
 			try {
-				pos = this[obstacleName].cPos.x;
-				obstacles.push(this[obstacleName])
+				pos = me[obstacleName].cPos.x;
+				obstacles.push(me[obstacleName])
 			} catch (e) {
-				pos = 1000
+				pos = 500
 			}
 			positions.push(pos)
 		}
-		let max = Math.max(...positions);
-		let isPlane = obstacles.find(el => el.cPos.x === max) instanceof Plane;
-		return {max, isPlane};
+		let last = obstacles.find(el => el.cPos.x === Math.max(...positions));
+		if (!last){
+		    last = {cPos: {x: 500}}
+		}
+		return last;
 	}
 
-	drawPositions(){
+	drawPositions() {
 		let ctx = document.getElementById('obstacle-layer').getContext('2d');
 		ctx.beginPath();
 		// ctx.strokeStyle
@@ -88,7 +99,7 @@ export default class Obstacles {
 				pos = 1000
 			}
 			ctx.moveTo(20, 5 + 5 * i);
-			ctx.lineTo(20 + pos /10, 5 + 5 * i);
+			ctx.lineTo(20 + pos / 10, 5 + 5 * i);
 			ctx.stroke();
 		}
 	}
