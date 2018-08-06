@@ -1,54 +1,21 @@
-import img from '../img/environment_sheet.png'
-import Sprite from './Sprite'
-import {scoreOptions} from "./ScoreOptions";
 import Digit from "./Digit";
 
 export default class ScoreDisplay {
 	constructor() {
-		// this.gameOver = new Sprite({
-		// 	canvas: document.getElementById("biker-layer"),
-		// 	imageSrc: img,
-		// 	width: scoreOptions.game_over.width,
-		// 	height: 30,
-		// 	origin: {x: scoreOptions.game_over.x, y: 0},
-		// 	pos: {
-		// 		x: 405,
-		// 		y: 110
-		// 	}
-		// });
-		// this.initDigits();
-	}
-
-	initDigits() {
-		for (let i = 0; i < 10; i++) {
-			let name = 'digit_' + i;
-			this[name] = new Digit(i);
-
-			this[name].draw();
-		}
-	}
-
-	display() {
-		let me = this;
-		this.gameOver = new Sprite({
-			canvas: document.getElementById("biker-layer"),
-			imageSrc: img,
-			width: scoreOptions.game_over.width,
-			height: 30,
-			origin: {x: scoreOptions.game_over.x, y: 0},
-			pos: {
-				x: 405,
-				y: 110
-			}
-		});
-		// me.gameOver.draw();
-
+		this.canvas = document.getElementById("biker-layer");
 	}
 
 	showScore(score) {
-		let length = score.toString().length;
-		// console.log('lenght', length);
-		// this.digit_1.draw();
+		let me = this,
+				scStr = score.toString(),
+				len = scStr.length,
+				digits = [];
+
+		me.canvas.getContext('2d').clearRect(me.canvas.width - 23 * len, 0, 23 * len, 30);
+
+		for (let i = 0; i < len; i++) {
+			digits[i] = new Digit(scStr[i], len - i);
+		}
 	}
 
 

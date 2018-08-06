@@ -88,7 +88,6 @@ export default class Obstacles {
 	drawPositions() {
 		let ctx = document.getElementById('obstacle-layer').getContext('2d');
 		ctx.beginPath();
-		// ctx.strokeStyle
 
 		for (let i = 1; i <= this.obstaclesNumber; i++) {
 			let obstacleName = 'obstacle_' + i;
