@@ -11,7 +11,7 @@ export default class Digit extends Sprite {
 			height: 26,
 			origin: {x: width * num, y: 0},
 			pos: {
-				x: 1000 - width * pos,
+				x: 1000 - width * (1 + pos),
 				y: 0
 			}
 		});

@@ -9,6 +9,7 @@ export default class GameRunner {
 		let me = this;
 		me.currentStatus = 'idle';
 		me.acceleration = 0.001;
+		me.HIScore = 0;
 
 		me.trail = new Trail();
 		me.sky = new Sky();
@@ -117,9 +118,18 @@ export default class GameRunner {
 	startGame() {
 		let me = this;
 
+		me.clearAll();
+		if (me.HIScore > 0) {
+			me.score.showHIScore(me.HIScore);
+		}
 		me.currentSpeed = 4;
 		me.points = 0;
 		me.runGame();
+	}
+
+	clearAll() {
+		let canvas = document.getElementById("biker-layer");
+		canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
 	}
 
 	runGame() {
@@ -136,8 +146,16 @@ export default class GameRunner {
 	}
 
 	gameOver() {
-		let me = this;
+		let me = this,
+				score = Math.floor(me.points / 50);
+
 		me.currentStatus = 'crash';
-		window.cancelAnimationFrame(this.animID);
+		me.score.gameIsOver();
+
+		if (score > me.HIScore) {
+			me.HIScore = score;
+		}
+
+		window.cancelAnimationFrame(me.animID);
 	}
 }
