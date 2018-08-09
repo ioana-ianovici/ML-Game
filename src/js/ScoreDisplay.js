@@ -1,7 +1,7 @@
 import Digit from "./Digit";
 import Sprite from "./Sprite";
 import img from "../img/environment_sheet.png";
-import {scoreOptions} from "./ScoreOptions";
+import {assetsOptions} from "./AssetsOptions";
 
 export default class ScoreDisplay {
 	constructor() {
@@ -12,12 +12,12 @@ export default class ScoreDisplay {
 		this.displayNumber(score,0);
 	}
 
-	gameIsOver() {
+	showGameOver() {
 		let pos = {
-			x: (1000 - scoreOptions.game_over.width) / 2,
+			x: (1000 - assetsOptions.game_over.width) / 2,
 			y: 110
 		};
-		this.createAsset(scoreOptions.game_over, pos);
+		this.createAsset(assetsOptions.game_over, pos);
 	}
 
 	showHIScore(score) {
@@ -26,7 +26,7 @@ export default class ScoreDisplay {
 					x: 1000 - 300,
 					y: 0
 				};
-		me.createAsset(scoreOptions.HI, pos);
+		me.createAsset(assetsOptions.HI, pos);
 		me.displayNumber(score,6);
 	}
 

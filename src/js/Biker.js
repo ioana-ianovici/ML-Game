@@ -43,7 +43,7 @@ export default class Biker extends Sprite {
 		me.setProps('jump');
 		if (!me.jumping){
 			me.jumping = true;
-			me.verticalVelocity = 27;
+			me.verticalVelocity = 30;
 		}
 	}
 
@@ -60,10 +60,14 @@ export default class Biker extends Sprite {
 	}
 
 	crashDown() {
+		this.jumping = false;
+		this.cPos.y = this.groundLevel;
 		this.setProps('crashDown');
 	}
 
 	crashUp() {
+		this.jumping=false;
+		this.cPos.y = this.groundLevel;
 		this.setProps('crashUp');
 	}
 

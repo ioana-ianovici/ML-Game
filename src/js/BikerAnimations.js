@@ -45,6 +45,6 @@ export const animations = {
 		nextAction: 'lastFrame',
 		frameRow: 2,
 		frameSequence: [0, 1, 2, 3, 4, 5, 6, 7],
-		tpf: 5
+		tpf: 4
 	}
 };

@@ -1,4 +1,4 @@
-export const scoreOptions = {
+export const assetsOptions = {
 	digits: {
 		width:23
 	},

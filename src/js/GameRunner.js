@@ -3,6 +3,7 @@ import Sky from './Sky'
 import Biker from './Biker'
 import Obstacles from './Obstacles'
 import ScoreDisplay from "./ScoreDisplay";
+import Plane from "./Plane";
 
 export default class GameRunner {
 	constructor() {
@@ -13,7 +14,6 @@ export default class GameRunner {
 
 		me.trail = new Trail();
 		me.sky = new Sky();
-		me.obstacles = new Obstacles();
 		me.biker = new Biker();
 		me.score = new ScoreDisplay();
 		me.loadElements();
@@ -24,7 +24,6 @@ export default class GameRunner {
 		let me = this;
 		window.addEventListener("load", () => {
 			me.sky.move();
-			me.obstacles.reDraw();
 			me.trail.reDraw();
 			me.biker.draw();
 			me.biker.reDraw();
@@ -118,12 +117,14 @@ export default class GameRunner {
 	startGame() {
 		let me = this;
 
+		me.currentStatus = 'running';
 		me.clearAll();
 		if (me.HIScore > 0) {
 			me.score.showHIScore(me.HIScore);
 		}
 		me.currentSpeed = 4;
 		me.points = 0;
+		me.obstacles = new Obstacles();
 		me.runGame();
 	}
 
@@ -134,7 +135,11 @@ export default class GameRunner {
 
 	runGame() {
 		let me = this;
-		me.currentStatus = 'running';
+
+		if (me.checkCollision()) {
+			return
+		}
+
 		me.currentSpeed += me.acceleration;
 		me.points += me.currentSpeed;
 		me.score.showScore(parseInt(me.points / 50));
@@ -145,16 +150,60 @@ export default class GameRunner {
 		me.animID = window.requestAnimationFrame(() => me.runGame());
 	}
 
+	checkCollision() {
+		let me = this,
+				biker = me.biker,
+				obstacle = null,
+				square = {};
+
+		for (let i = 0; i < me.obstacles.obstaclesNumber; i++) {
+			let obs = me.obstacles['obstacle_' + (i + 1)];
+			// check if any obstacle enters biker sprite area
+			if (obs.cPos.x < biker.cPos.x + biker.width && obs.cPos.x + obs.width > biker.cPos.x) {
+				obstacle = obs;
+				// select intersection square
+				square = {
+					x: Math.floor(Math.max(obs.cPos.x, biker.cPos.x)),
+					y: Math.floor(Math.max(obs.cPos.y, biker.cPos.y)),
+					w: Math.min(Math.ceil(obstacle.cPos.x < biker.cPos.x ? obstacle.width - Math.abs(obstacle.cPos.x - biker.cPos.x) : biker.width - Math.abs(obstacle.cPos.x - biker.cPos.x)), obstacle.width, biker.width),
+					h: Math.min(obstacle.cPos.y < biker.cPos.y ? obstacle.height - Math.abs(obs.cPos.y - biker.cPos.y) : biker.height - Math.abs(obstacle.cPos.y - biker.cPos.y), obstacle.height, biker.height)
+				};
+			}
+		}
+
+		if (obstacle && square.w > 0 && square.h > 0) {
+			let img1 = biker.canvas.getContext('2d').getImageData(square.x, square.y, square.w, square.h),
+					img2 = obstacle.canvas.getContext('2d').getImageData(square.x, square.y, square.w, square.h);
+			for (let i = 0; i < img1.data.length; i++) {
+				// check if the images are nontransparent at any given pixel on both sprites: biker and obstacle
+				if (img1.data[i] > 0 && img2.data[i] > 0) {
+					if (obstacle instanceof Plane) {
+						me.biker.crashUp();
+					} else {
+						me.biker.crashDown();
+					}
+					me.gameOver();
+					return true
+				}
+			}
+		}
+
+	}
+
 	gameOver() {
 		let me = this,
 				score = Math.floor(me.points / 50);
 
 		me.currentStatus = 'crash';
-		me.score.gameIsOver();
+		me.score.showGameOver();
 
 		if (score > me.HIScore) {
 			me.HIScore = score;
 		}
+
+		// quick fix to remove obstacles at game over
+		// let canvas = document.getElementById("obstacle-layer");
+		// canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
 
 		window.cancelAnimationFrame(me.animID);
 	}

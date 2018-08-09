@@ -112,6 +112,6 @@ export default class Obstacles {
 			let obstacleName = 'obstacle_' + i;
 			this[obstacleName].draw();
 		}
-		this.drawPositions();
+		// this.drawPositions();
 	}
 }
