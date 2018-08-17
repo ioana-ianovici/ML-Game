@@ -90,7 +90,7 @@ export default class GameRunner {
 	startGame() {
 		let me = this;
 
-		console.log(me.currentStatus);
+		// console.log(me.currentStatus);
 		me.currentStatus = 'running';
 		me.clearAll();
 		if (me.HIScore > 0) {
@@ -154,7 +154,8 @@ export default class GameRunner {
 				// check if the images are nontransparent at any given pixel on both sprites: biker and obstacle
 				if (img1.data[i] > 0 && img2.data[i] > 0) {
 					img1.data[i + 1] = 255;
-					console.log(square);
+					// color in green the checked pixels
+					// console.log(square);
 					if (obstacle instanceof Plane) {
 						me.biker.crashUp();
 					} else {

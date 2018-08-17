@@ -143,8 +143,8 @@ export default class Biker extends Sprite {
 				me.origin.x = me.frameSequence[0] * me.width;
 			} else { // if it's called at a frame switch in the same animation
 
-				// if a button is held down
-				if (me.desiredAction && me.action) {
+				// if an action button is held down while jumping
+				if (me.desiredAction && me.action.search('crash') < 0) {
 					me.nextAction = me.desiredAction;
 					if (me.desiredAction === 'jump') {
 						me.action = 'ride';
