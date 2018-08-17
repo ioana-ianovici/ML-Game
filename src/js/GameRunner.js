@@ -34,28 +34,9 @@ export default class GameRunner {
 	processHandlers(e) {
 		let me = this;
 
-		if (e.type === 'keydown') {
-			switch (e.keyCode) {
-				case 38:
-				case 32:
-					if (me.biker.jumping) {
-						me.biker.desiredAction = 'jump';
-					}
-					break;
-				case 40:
-					if (me.biker.jumping) {
-						me.biker.desiredAction = 'duck';
-					}
-			}
-		} else if (e.type === 'keyup') {
-			me.biker.desiredAction = null;
-		}
-
-
 		if (e.repeat) {
 			return
 		}
-
 
 		if (e.type === 'keydown') {
 			// console.log(e.type, e.keyCode);
@@ -66,35 +47,27 @@ export default class GameRunner {
 					if (me.currentStatus === 'idle') {
 						me.startGame();
 					}
-					me.biker.jump();
-					break;
-				case 81:
-					e.preventDefault();
 					if (me.currentStatus === 'running') {
-						me.biker.crashDown();
-						me.gameOver();
+						me.biker.jump();
+						if (me.biker.jumping) {
+							me.biker.desiredAction = 'jump';
+						}
 					}
-					break;
-				case 87:
-					e.preventDefault();
-					if (me.currentStatus === 'running') {
-						me.biker.crashUp();
-						me.gameOver();
-					}
+
+
 					break;
 				case 40:
 					e.preventDefault();
 					if (me.currentStatus === 'running' && !me.biker.jumping) {
 						me.biker.duck();
 					}
+					if (me.biker.jumping) {
+						me.biker.desiredAction = 'duck';
+					}
 			}
 		} else if (e.type === 'keyup') {
-			if (e.keyCode === 38 || e.keyCode === 32) {
-				if (me.currentStatus === 'crash') {
-					e.preventDefault();
-					me.startGame();
-				}
-			} else if (e.keyCode === 40 && me.currentStatus === 'running' && (me.biker.action === 'ducking' || me.biker.action === 'duck')) {
+			me.biker.desiredAction = null;
+			if (e.keyCode === 40 && me.currentStatus === 'running' && (me.biker.action === 'ducking' || me.biker.action === 'duck')) {
 				e.preventDefault();
 				me.biker.unduck();
 			}
@@ -117,6 +90,7 @@ export default class GameRunner {
 	startGame() {
 		let me = this;
 
+		console.log(me.currentStatus);
 		me.currentStatus = 'running';
 		me.clearAll();
 		if (me.HIScore > 0) {
@@ -168,15 +142,19 @@ export default class GameRunner {
 					w: Math.min(Math.ceil(obstacle.cPos.x < biker.cPos.x ? obstacle.width - Math.abs(obstacle.cPos.x - biker.cPos.x) : biker.width - Math.abs(obstacle.cPos.x - biker.cPos.x)), obstacle.width, biker.width),
 					h: Math.min(obstacle.cPos.y < biker.cPos.y ? obstacle.height - Math.abs(obs.cPos.y - biker.cPos.y) : biker.height - Math.abs(obstacle.cPos.y - biker.cPos.y), obstacle.height, biker.height)
 				};
+				break;
 			}
 		}
 
-		if (obstacle && square.w > 0 && square.h > 0) {
+		if (square.w > 0 && square.h > 0) {
 			let img1 = biker.canvas.getContext('2d').getImageData(square.x, square.y, square.w, square.h),
 					img2 = obstacle.canvas.getContext('2d').getImageData(square.x, square.y, square.w, square.h);
-			for (let i = 0; i < img1.data.length; i++) {
+			// console.log(img1.data.length / 32);
+			for (let i = 3; i < img1.data.length; i += 64) {
 				// check if the images are nontransparent at any given pixel on both sprites: biker and obstacle
 				if (img1.data[i] > 0 && img2.data[i] > 0) {
+					img1.data[i + 1] = 255;
+					console.log(square);
 					if (obstacle instanceof Plane) {
 						me.biker.crashUp();
 					} else {
@@ -185,7 +163,10 @@ export default class GameRunner {
 					me.gameOver();
 					return true
 				}
+
+				img1.data[i - 2] = 255;
 			}
+			biker.canvas.getContext('2d').putImageData(img1, square.x, square.y);
 		}
 
 	}
@@ -195,6 +176,9 @@ export default class GameRunner {
 				score = Math.floor(me.points / 50);
 
 		me.currentStatus = 'crash';
+		setTimeout(() => {
+			me.currentStatus = 'idle'
+		}, 2000);
 		me.score.showGameOver();
 
 		if (score > me.HIScore) {
@@ -202,8 +186,8 @@ export default class GameRunner {
 		}
 
 		// quick fix to remove obstacles at game over
-		// let canvas = document.getElementById("obstacle-layer");
-		// canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+		let canvas = document.getElementById("obstacle-layer");
+		canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
 
 		window.cancelAnimationFrame(me.animID);
 	}

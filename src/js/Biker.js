@@ -41,7 +41,7 @@ export default class Biker extends Sprite {
 	jump() {
 		let me = this;
 		me.setProps('jump');
-		if (!me.jumping){
+		if (!me.jumping) {
 			me.jumping = true;
 			me.verticalVelocity = 30;
 		}
@@ -66,7 +66,7 @@ export default class Biker extends Sprite {
 	}
 
 	crashUp() {
-		this.jumping=false;
+		this.jumping = false;
 		this.cPos.y = this.groundLevel;
 		this.setProps('crashUp');
 	}
@@ -113,15 +113,22 @@ export default class Biker extends Sprite {
 		window.requestAnimationFrame(cbk);
 	}
 
-	switchFrame(set) {
+	switchFrame(set) { // we use set with value true or 1 in order to start from first frame, it's only called when switching animations
 		let me = this;
+
+		// while jumping
 		if (me.jumping) {
+			// change horizontal position according to jumping force
 			me.cPos.y = me.cPos.y - me.verticalVelocity;
 			me.verticalVelocity = me.verticalVelocity - me.gravity;
 			me.origin.x = me.frameSequence[1] * me.width;
+
+			// when reaching the top of the jump and start falling switch to next frame
 			if (me.verticalVelocity < 0) {
 				me.origin.x = me.frameSequence[2] * me.width;
 			}
+
+			// perform landing when horizontal position hits ground level
 			if (me.cPos.y >= me.groundLevel) {
 				me.jumping = false;
 				me.verticalVelocity = 0;
@@ -129,23 +136,33 @@ export default class Biker extends Sprite {
 				me.origin.x = me.frameSequence[3] * me.width;
 				me.frameIndex = me.frameNum - 1;
 			}
-		} else {
+		} else { // if not jumping
+
+			// if it's called on animation switch
 			if (set) {
 				me.origin.x = me.frameSequence[0] * me.width;
-			} else {
-				if (me.desiredAction){
-				    me.nextAction = me.desiredAction;
-				    if (me.desiredAction==='jump'){
-					    me.action = 'ride';
-				    }
+			} else { // if it's called at a frame switch in the same animation
+
+				// if a button is held down
+				if (me.desiredAction && me.action) {
+					me.nextAction = me.desiredAction;
+					if (me.desiredAction === 'jump') {
+						me.action = 'ride';
+					}
 				}
+
+				// at last frame of an animation call next animation if there is one
 				if (me.nextAction && me.frameIndex === me.frameNum - 1) {
 					me.doNextAction();
 					return;
 				}
+
+				// update the frame index here
 				me.frameIndex = me.frameIndex >= me.frameNum - 1 ? 0 : me.frameIndex + 1;
 				me.origin.x = me.frameSequence[me.frameIndex] * me.width;
 			}
+
+			// update the frame row here
 			me.origin.y = me.frameRow * me.height;
 		}
 		me.canvas.getContext('2d').clearRect(0, 0, 200, me.canvas.height);
