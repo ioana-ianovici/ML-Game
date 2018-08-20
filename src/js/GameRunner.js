@@ -149,12 +149,12 @@ export default class GameRunner {
 		if (square.w > 0 && square.h > 0) {
 			let img1 = biker.canvas.getContext('2d').getImageData(square.x, square.y, square.w, square.h),
 					img2 = obstacle.canvas.getContext('2d').getImageData(square.x, square.y, square.w, square.h);
-			// console.log(img1.data.length / 32);
+			console.log(img1.data.length / 64);
 			for (let i = 3; i < img1.data.length; i += 64) {
 				// check if the images are nontransparent at any given pixel on both sprites: biker and obstacle
 				if (img1.data[i] > 0 && img2.data[i] > 0) {
-					img1.data[i + 1] = 255;
 					// color in green the checked pixels
+					// img1.data[i + 1] = 255;
 					// console.log(square);
 					if (obstacle instanceof Plane) {
 						me.biker.crashUp();
@@ -164,10 +164,10 @@ export default class GameRunner {
 					me.gameOver();
 					return true
 				}
-
-				img1.data[i - 2] = 255;
+				// apply the green color
+				// img1.data[i - 2] = 255;
 			}
-			biker.canvas.getContext('2d').putImageData(img1, square.x, square.y);
+			// biker.canvas.getContext('2d').putImageData(img1, square.x, square.y);
 		}
 
 	}
