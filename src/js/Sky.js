@@ -1,10 +1,11 @@
 import Cloud from './Cloud'
 import {randomNumber} from './globalFunctions'
+import {settings} from "./Settings";
 
 export default class Sky {
 	constructor() {
 		let me = this;
-		me.cloudsNumber = 5;
+		me.cloudsNumber = settings.cloudsNumber;
 		me.generateClouds();
 	}
 

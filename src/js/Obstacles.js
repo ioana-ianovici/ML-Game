@@ -1,11 +1,12 @@
 import {randomNumber, probability} from "./globalFunctions";
 import Rock from './Rock'
 import Plane from './Plane'
+import {settings} from "./Settings";
 
 export default class Obstacles {
 	constructor() {
 		let me = this;
-		me.obstaclesNumber = 3;
+		me.obstaclesNumber = settings.obstaclesNumber;
 		me.generateObstacles();
 	}
 

@@ -4,12 +4,13 @@ import Biker from './Biker'
 import Obstacles from './Obstacles'
 import ScoreDisplay from "./ScoreDisplay";
 import Plane from "./Plane";
+import {settings} from "./Settings";
 
 export default class GameRunner {
 	constructor() {
 		let me = this;
 		me.currentStatus = 'idle';
-		me.acceleration = 0.001;
+		me.acceleration = settings.acceleration;
 		me.HIScore = 0;
 
 		me.trail = new Trail();
@@ -96,7 +97,7 @@ export default class GameRunner {
 		if (me.HIScore > 0) {
 			me.score.showHIScore(me.HIScore);
 		}
-		me.currentSpeed = 4;
+		me.currentSpeed = settings.initialSpeed;
 		me.points = 0;
 		me.obstacles = new Obstacles();
 		me.runGame();
@@ -149,7 +150,7 @@ export default class GameRunner {
 		if (square.w > 0 && square.h > 0) {
 			let img1 = biker.canvas.getContext('2d').getImageData(square.x, square.y, square.w, square.h),
 					img2 = obstacle.canvas.getContext('2d').getImageData(square.x, square.y, square.w, square.h);
-			console.log(img1.data.length / 64);
+			// console.log(img1.data.length / 64);
 			for (let i = 3; i < img1.data.length; i += 64) {
 				// check if the images are nontransparent at any given pixel on both sprites: biker and obstacle
 				if (img1.data[i] > 0 && img2.data[i] > 0) {
@@ -179,7 +180,7 @@ export default class GameRunner {
 		me.currentStatus = 'crash';
 		setTimeout(() => {
 			me.currentStatus = 'idle'
-		}, 2000);
+		}, settings.game_over_delay);
 		me.score.showGameOver();
 
 		if (score > me.HIScore) {
