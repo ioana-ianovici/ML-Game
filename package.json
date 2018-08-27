@@ -1,0 +1,42 @@
+{
+  "name": "assist-biker-game",
+  "version": "1.0.0",
+  "description": "The main purpose of this project is to study AI &amp; ML techniques and implementations. The ML algorithms will learn to play a Game.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --config webpack.dev.js --hot",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ioana-ianovici/ML-Game.git"
+  },
+  "keywords": [
+    "assist",
+    "canvas",
+    "html5",
+    "css3"
+  ],
+  "author": "Ioana Ianovici, Alexandru Tornea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ioana-ianovici/ML-Game/issues"
+  },
+  "homepage": "https://github.com/ioana-ianovici/ML-Game#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.19",
+    "csp-html-webpack-plugin": "^2.3.0",
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.0",
+    "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^4.12.2",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-md5-hash": "0.0.6",
+    "webpack-merge": "^4.1.3"
+  }
+}
