@@ -3,7 +3,7 @@ import Sprite from './Sprite'
 import {randomNumber} from "./globalFunctions";
 
 export default class Cloud extends Sprite {
-	constructor() {
+	constructor(x) {
 		super({
 			canvas: document.getElementById("background-layer"),
 			imageSrc: img,
@@ -11,7 +11,7 @@ export default class Cloud extends Sprite {
 			height: 64,
 			origin: {x: 0, y: 24},
 			pos: {
-				x: randomNumber(0, 1200),
+				x,
 				y: randomNumber(0, 80)
 			}
 		});

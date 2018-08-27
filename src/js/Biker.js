@@ -116,7 +116,6 @@ export default class Biker extends Sprite {
 	switchFrame(set) { // we use set with value true or 1 in order to start from first frame, it's only called when switching animations
 		let me = this;
 
-		// while jumping
 		if (me.jumping) {
 			// change horizontal position according to jumping force
 			me.cPos.y = me.cPos.y - me.verticalVelocity;
@@ -141,11 +140,13 @@ export default class Biker extends Sprite {
 			// if the function is called on animation switch
 			if (set) {
 				me.origin.x = me.frameSequence[0] * me.width;
-			} else { // if it's called at a frame switch in the same animation
+			} else {
 
 				// if an action button is held down while jumping
 				if (me.desiredAction && me.action === 'jump') {
 					me.nextAction = me.desiredAction;
+
+					// prevent continuous jumping
 					if (me.desiredAction === 'jump') {
 						me.action = 'ride';
 					}
@@ -157,14 +158,16 @@ export default class Biker extends Sprite {
 					return;
 				}
 
-				// update the frame index here
+				// update the frame index
 				me.frameIndex = me.frameIndex >= me.frameNum - 1 ? 0 : me.frameIndex + 1;
 				me.origin.x = me.frameSequence[me.frameIndex] * me.width;
 			}
 
-			// update the frame row here
+			// update the frame row
 			me.origin.y = me.frameRow * me.height;
 		}
+
+		// clear canvas and redraw
 		me.canvas.getContext('2d').clearRect(0, 0, 200, me.canvas.height);
 		me.draw();
 	}

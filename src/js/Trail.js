@@ -15,7 +15,6 @@ export default class Trail {
 		for (let i=1; i<=3; i++){
 			const tile = me['tile_' + i];
 			const xPos = tile.cPos.x;
-			// when the tile passes left side of the canvass it is repositioned at the right of the other tiles
 			tile.cPos.x = xPos <= -me.width ? xPos + me.width * 3 - distance : xPos - distance;
 		}
 

@@ -18,25 +18,25 @@ export default class Obstacles {
 	}
 
 	createObstacle(obstacleName, currentSpeed) {
-		let me = this;
-		let last = me.findLast();
-		let lastPos = last.cPos.x;
-		let pos = randomNumber(500, 1000);
-		let planeAhead = last instanceof Plane;
+		let me = this,
+				last = me.findLast(),
+				lastPos = last.cPos.x,
+				pos = randomNumber(500, 1000),
+				planeAhead = last instanceof Plane;
 
 		if (probability(settings.rockProbability)) {
-			if (planeAhead){
+			if (planeAhead) {
 				pos += lastPos * currentSpeed / (3 + currentSpeed);
 			} else {
 				pos += lastPos;
 			}
 			pos = pos < lastPos ? lastPos + 1 : pos;
-			me[obstacleName] = new Rock(pos, randomNumber(1, 2));
+			me[obstacleName] = new Rock(pos);
 		} else {
-			if (planeAhead){
-			    pos += lastPos;
+			if (planeAhead) {
+				pos += lastPos;
 			} else {
-				pos += lastPos * (3 + currentSpeed) / currentSpeed; // this formula does not consider the game acceleration
+				pos += lastPos * (3 + currentSpeed) / currentSpeed;
 			}
 			me[obstacleName] = new Plane(pos);
 		}
@@ -65,12 +65,13 @@ export default class Obstacles {
 	}
 
 	findLast() {
-		let me = this;
-		let positions = [];
-		let obstacles = [];
+		let me = this,
+				positions = [],
+				obstacles = [];
+
 		for (let i = 1; i <= me.obstaclesNumber; i++) {
-			let obstacleName = 'obstacle_' + i;
-			let pos;
+			let obstacleName = 'obstacle_' + i,
+					pos;
 			try {
 				pos = me[obstacleName].cPos.x;
 				obstacles.push(me[obstacleName])
@@ -79,29 +80,12 @@ export default class Obstacles {
 			}
 			positions.push(pos)
 		}
+
 		let last = obstacles.find(el => el.cPos.x === Math.max(...positions));
-		if (!last){
-		    last = {cPos: {x: 500}}
+		if (!last) {
+			last = {cPos: {x: 500}}
 		}
 		return last;
-	}
-
-	drawPositions() {
-		let ctx = document.getElementById('obstacle-layer').getContext('2d');
-		ctx.beginPath();
-
-		for (let i = 1; i <= this.obstaclesNumber; i++) {
-			let obstacleName = 'obstacle_' + i;
-			let pos;
-			try {
-				pos = this[obstacleName].cPos.x;
-			} catch (e) {
-				pos = 1000
-			}
-			ctx.moveTo(20, 5 + 5 * i);
-			ctx.lineTo(20 + pos / 10, 5 + 5 * i);
-			ctx.stroke();
-		}
 	}
 
 	reDraw() {
@@ -113,6 +97,5 @@ export default class Obstacles {
 			let obstacleName = 'obstacle_' + i;
 			this[obstacleName].draw();
 		}
-		// this.drawPositions();
 	}
 }

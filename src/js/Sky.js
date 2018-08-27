@@ -1,4 +1,5 @@
 import Cloud from './Cloud'
+import {randomNumber} from './globalFunctions'
 import {settings} from "./Settings";
 
 export default class Sky {
@@ -11,7 +12,7 @@ export default class Sky {
 	generateClouds() {
 		for (let i = 1; i <= this.cloudsNumber; i++) {
 			let cloudName = 'cloud_' + i;
-			this[cloudName] = new Cloud();
+			this[cloudName] = new Cloud(randomNumber(0, 1200));
 		}
 	}
 
@@ -22,7 +23,7 @@ export default class Sky {
 			const cloudName = 'cloud_' + i;
 			let cloud = me[cloudName];
 			if (cloud.cPos.x < -cloud.width) {
-				me[cloudName] = new Cloud();
+				me[cloudName] = new Cloud(randomNumber(1000, 1200));
 			} else {
 				cloud.cPos.x = cloud.cPos.x - cloud.speed;
 			}
