@@ -3,11 +3,7 @@ import Sprite from './Sprite'
 
 export default class Rock extends Sprite {
 	constructor(pos, type) {
-		let originX = 0;
-
-		if (type === 2) {
-			originX = 100
-		}
+		let originX = type === 2 ? 100 : 0;
 
 		super({
 			canvas: document.getElementById("obstacle-layer"),

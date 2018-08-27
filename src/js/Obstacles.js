@@ -24,7 +24,7 @@ export default class Obstacles {
 		let pos = randomNumber(500, 1000);
 		let planeAhead = last instanceof Plane;
 
-		if (probability(70)) {
+		if (probability(settings.rockProbability)) {
 			if (planeAhead){
 				pos += lastPos * currentSpeed / (3 + currentSpeed);
 			} else {

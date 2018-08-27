@@ -1,9 +1,10 @@
 import img from '../img/environment_sheet.png'
 import Sprite from './Sprite'
+import {assetsOptions} from "./AssetsOptions";
 
 export default class Digit extends Sprite {
 	constructor(num, pos) {
-		let width = 23;
+		let width = assetsOptions.digits.width;
 		super({
 			canvas: document.getElementById("biker-layer"),
 			imageSrc: img,

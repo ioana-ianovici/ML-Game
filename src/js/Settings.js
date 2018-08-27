@@ -3,5 +3,6 @@ export const settings = {
 	obstaclesNumber: 3,
 	cloudsNumber: 5,
 	initialSpeed: 4,
-	acceleration: 0.001
+	acceleration: 0.001,
+	rockProbability: 70
 };
