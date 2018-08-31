@@ -21,7 +21,7 @@ export default class Obstacles {
 		let me = this,
 				last = me.findLast(),
 				lastPos = last.cPos.x,
-				pos = randomNumber(500, 1000),
+				pos = randomNumber(400 + 25 * currentSpeed, 800 + 50 * currentSpeed),
 				planeAhead = last instanceof Plane;
 
 		if (probability(settings.rockProbability)) {
@@ -82,11 +82,13 @@ export default class Obstacles {
 		}
 
 		let last = obstacles.find(el => el.cPos.x === Math.max(...positions));
+
 		if (!last) {
 			last = {cPos: {x: 500}}
 		}
 		return last;
 	}
+
 
 	reDraw() {
 		let canvas = document.getElementById("obstacle-layer");
