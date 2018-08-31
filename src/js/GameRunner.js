@@ -118,6 +118,7 @@ export default class GameRunner {
 		me.trail.move(me.currentSpeed);
 		me.obstacles.move(me.currentSpeed);
 
+		AI.think(me);
 		me.animID = window.requestAnimationFrame(() => me.runGame());
 	}
 
@@ -181,7 +182,10 @@ export default class GameRunner {
 
 		// set a timeout to prevent instant game restart
 		setTimeout(() => {
-			me.currentStatus = 'idle'
+			me.currentStatus = 'idle';
+			if (AI.restart){
+				AI.start();
+			}
 		}, settings.game_over_delay);
 
 		// diplay game over text
