@@ -20,7 +20,7 @@ export default class Obstacles {
 	createObstacle(obstacleName, currentSpeed) {
 		let me = this,
 				last = me.findLast(),
-				lastPos = last.cPos.x,
+				lastPos = last.pos.x,
 				pos = randomNumber(400 + 25 * currentSpeed, 800 + 50 * currentSpeed),
 				planeAhead = last instanceof Plane;
 
@@ -49,13 +49,13 @@ export default class Obstacles {
 			let obstacleName = 'obstacle_' + i;
 			let obstacle = me[obstacleName];
 
-			if (obstacle.cPos.x < -obstacle.width) {
+			if (obstacle.pos.x < -obstacle.width) {
 				this.createObstacle(obstacleName, distance)
 			} else {
 				if (obstacle instanceof Plane) {
-					obstacle.cPos.x = obstacle.cPos.x - distance - obstacle.speed;
+					obstacle.pos.x = obstacle.pos.x - distance - obstacle.speed;
 				} else {
-					obstacle.cPos.x = obstacle.cPos.x - distance;
+					obstacle.pos.x = obstacle.pos.x - distance;
 				}
 			}
 
@@ -73,7 +73,7 @@ export default class Obstacles {
 			let obstacleName = 'obstacle_' + i,
 					pos;
 			try {
-				pos = me[obstacleName].cPos.x;
+				pos = me[obstacleName].pos.x;
 				obstacles.push(me[obstacleName])
 			} catch (e) {
 				pos = 500
@@ -81,10 +81,10 @@ export default class Obstacles {
 			positions.push(pos)
 		}
 
-		let last = obstacles.find(el => el.cPos.x === Math.max(...positions));
+		let last = obstacles.find(el => el.pos.x === Math.max(...positions));
 
 		if (!last) {
-			last = {cPos: {x: 500}}
+			last = {pos: {x: 500}}
 		}
 		return last;
 	}

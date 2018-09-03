@@ -128,10 +128,10 @@ export default class GameRunner {
 
 		for (let i = 0; i < me.obstacles.obstaclesNumber; i++) {
 			let obstacle = me.obstacles['obstacle_' + (i + 1)],
-					bx = biker.cPos.x,
-					ox = obstacle.cPos.x,
-					by = biker.cPos.y,
-					oy = obstacle.cPos.y,
+					bx = biker.pos.x,
+					ox = obstacle.pos.x,
+					by = biker.pos.y,
+					oy = obstacle.pos.y,
 					bw = biker.width,
 					ow = obstacle.width,
 					bh = biker.height,

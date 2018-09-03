@@ -8,7 +8,7 @@ export default class Sprite {
 		me.width = options.width;
 		me.height = options.height;
 
-		me.cPos = options.pos;
+		me.pos = options.pos;
 	}
 
 	draw(){
@@ -21,8 +21,8 @@ export default class Sprite {
 				me.origin.y,
 				me.width,
 				me.height,
-				me.cPos.x,
-				me.cPos.y,
+				me.pos.x,
+				me.pos.y,
 				me.width,
 				me.height
 		);

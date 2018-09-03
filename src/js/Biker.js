@@ -61,13 +61,13 @@ export default class Biker extends Sprite {
 
 	crashDown() {
 		this.jumping = false;
-		this.cPos.y = this.groundLevel;
+		this.pos.y = this.groundLevel;
 		this.setProps('crashDown');
 	}
 
 	crashUp() {
 		this.jumping = false;
-		this.cPos.y = this.groundLevel;
+		this.pos.y = this.groundLevel;
 		this.setProps('crashUp');
 	}
 
@@ -118,7 +118,7 @@ export default class Biker extends Sprite {
 
 		if (me.jumping) {
 			// change horizontal position according to jumping force
-			me.cPos.y = me.cPos.y - me.verticalVelocity;
+			me.pos.y = me.pos.y - me.verticalVelocity;
 			me.verticalVelocity = me.verticalVelocity - me.gravity;
 			me.origin.x = me.frameSequence[1] * me.width;
 
@@ -128,10 +128,10 @@ export default class Biker extends Sprite {
 			}
 
 			// perform landing when horizontal position hits ground level
-			if (me.cPos.y >= me.groundLevel) {
+			if (me.pos.y >= me.groundLevel) {
 				me.jumping = false;
 				me.verticalVelocity = 0;
-				me.cPos.y = me.groundLevel;
+				me.pos.y = me.groundLevel;
 				me.origin.x = me.frameSequence[3] * me.width;
 				me.frameIndex = me.frameNum - 1;
 			}

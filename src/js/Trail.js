@@ -14,8 +14,8 @@ export default class Trail {
 
 		for (let i=1; i<=3; i++){
 			const tile = me['tile_' + i];
-			const xPos = tile.cPos.x;
-			tile.cPos.x = xPos <= -me.width ? xPos + me.width * 3 - distance : xPos - distance;
+			const xPos = tile.pos.x;
+			tile.pos.x = xPos <= -me.width ? xPos + me.width * 3 - distance : xPos - distance;
 		}
 
 		me.reDraw();

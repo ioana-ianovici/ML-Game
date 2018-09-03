@@ -41,13 +41,13 @@ export default class AIControls {
 			let obstacleName = 'obstacle_' + i,
 					pos;
 
-			pos = me[obstacleName].cPos.x;
+			pos = me[obstacleName].pos.x;
 			obstacles.push(me[obstacleName]);
 			positions.push(pos)
 		}
 
 		let distance = Math.min(...positions);
-		let obs = obstacles.find(el => el.cPos.x === Math.min(...positions)),
+		let obs = obstacles.find(el => el.pos.x === Math.min(...positions)),
 				flying = !!obs.speed;
 
 		return {distance, flying}

@@ -5,7 +5,7 @@
 
 	function AIProcess() {
 		let speed = game.currentSpeed;
-		let distance = game.obstacles['obstacle_1'].cPos.x - game.biker.cPos.x - game.biker.width;
+		let distance = game.obstacles['obstacle_1'].pos.x - game.biker.pos.x - game.biker.width;
 		let minJumpDistance = speed * 7 * 2;
 		let maxJumpDistance = speed * 7 * 3.5;
 

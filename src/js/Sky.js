@@ -22,10 +22,10 @@ export default class Sky {
 		for (let i = 1; i <= me.cloudsNumber; i++) {
 			const cloudName = 'cloud_' + i;
 			let cloud = me[cloudName];
-			if (cloud.cPos.x < -cloud.width) {
+			if (cloud.pos.x < -cloud.width) {
 				me[cloudName] = new Cloud(randomNumber(1000, 1200));
 			} else {
-				cloud.cPos.x = cloud.cPos.x - cloud.speed;
+				cloud.pos.x = cloud.pos.x - cloud.speed;
 			}
 		}
 
