@@ -23,7 +23,6 @@ export default class Trail {
 
 	reDraw(){
 		let me = this;
-
 		me.tile_1.draw();
 		me.tile_2.draw();
 		me.tile_3.draw();

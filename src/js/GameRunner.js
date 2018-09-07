@@ -24,12 +24,23 @@ export default class GameRunner {
 	loadElements() {
 		let me = this;
 		window.addEventListener("load", () => {
-			me.sky.move();
+			// me.sky.move();
 			me.trail.reDraw();
 			me.biker.draw();
-			me.biker.reDraw();
+			// me.biker.reDraw();
 			me.score.showScore(0);
+			me.runAnimation();
 		});
+	}
+
+	runAnimation(){
+		let me = this;
+		me.sky.move();
+		me.biker.reDraw();
+
+		me.currentStatus === 'running' ? me.runGame() : 'do nothing';
+
+		me.animID = window.requestAnimationFrame(()=>{me.runAnimation()})
 	}
 
 	processHandlers(e) {
@@ -99,17 +110,14 @@ export default class GameRunner {
 		me.currentSpeed = settings.initialSpeed;
 		me.points = 0;
 		me.obstacles = new Obstacles();
-		me.runGame();
+		// me.runGame();
 	}
-
 
 	// the recurrent game logic
 	runGame() {
 		let me = this;
 
-		if (me.checkCollision()) {
-			return
-		}
+		// if (me.checkCollision()) return;
 
 		me.currentSpeed += me.acceleration;
 		me.points += me.currentSpeed / 50;
@@ -119,7 +127,7 @@ export default class GameRunner {
 		me.obstacles.move(me.currentSpeed);
 
 		AICtrl.evaluate();
-		me.animID = window.requestAnimationFrame(() => me.runGame());
+		// me.animID = window.requestAnimationFrame(() => me.runGame());
 	}
 
 	checkCollision() {
@@ -196,6 +204,6 @@ export default class GameRunner {
 		canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
 
 		// stop the recurrence through this.runGame()
-		window.cancelAnimationFrame(me.animID);
+		// window.cancelAnimationFrame(me.animID);
 	}
 }

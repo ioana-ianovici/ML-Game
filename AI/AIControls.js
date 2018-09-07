@@ -2,18 +2,21 @@ export default class AIControls {
 	constructor() {
 		this.restart = false;
 		this.autostart = false;
+		this.isON = false;
 		if (this.autostart){
 			setTimeout(this.start.bind(this), 1500);
 		}
 	}
 
 	evaluate() {
-		let closest = this.getClosest();
-		let distance = closest.distance, //distance to the closest obstacle
-				flying = closest.flying, //the type of the closest obstacle
-				speed = game.currentSpeed;
-		if (AI && this.autostart){
-			AI.decide(distance, flying, speed)
+		if (this.isON){
+			let closest = this.getClosest();
+			let distance = closest.distance, //distance to the closest obstacle
+					flying = closest.flying, //the type of the closest obstacle
+					speed = game.currentSpeed;
+			if (AI && this.autostart){
+				AI.decide(distance, flying, speed)
+			}
 		}
 	}
 

@@ -30,8 +30,9 @@ export default class Sky {
 		}
 
 		me.reDraw();
-		let cbk = me.move.bind(me);
-		window.requestAnimationFrame(cbk);
+
+		// let cbk = me.move.bind(me);
+		// window.requestAnimationFrame(cbk);
 	}
 
 	reDraw() {

@@ -21,17 +21,16 @@ export default class Biker extends Sprite {
 	setProps(action) {
 		let me = this;
 		let setting = animations[action];
-		if (me.action !== action) {
-			me.action = action;
-			me.nextAction = setting.nextAction;
-			me.frameRow = setting.frameRow;
-			me.frameSequence = setting.frameSequence;
-			me.frameNum = setting.frameSequence.length;
-			me.tpf = setting.tpf;
-			me.frameIndex = me.frameSequence[0];
-			me.tick = 0;
-			me.switchFrame(1);
-		}
+		me.action = action;
+		me.nextAction = setting.nextAction;
+		me.frameRow = setting.frameRow;
+		me.frameSequence = setting.frameSequence;
+		me.frameNum = setting.frameSequence.length;
+		me.tpf = setting.tpf;
+		me.frameIndex = 0;
+		me.tick = 0;
+		me.origin.x = me.frameSequence[0] * me.width;
+		me.origin.y = me.frameRow * me.height;
 	}
 
 	ride() {
@@ -40,8 +39,8 @@ export default class Biker extends Sprite {
 
 	jump() {
 		let me = this;
-		me.setProps('jump');
 		if (!me.jumping) {
+			me.setProps('jump');
 			me.jumping = true;
 			me.verticalVelocity = 30;
 		}
@@ -49,6 +48,7 @@ export default class Biker extends Sprite {
 
 	duck() {
 		this.setProps('duck');
+		this.frameIndex = -1;
 	}
 
 	unduck() {
@@ -84,15 +84,6 @@ export default class Biker extends Sprite {
 			case 'ride':
 				me.setProps('ride');
 				break;
-			case 'jump':
-				me.jump();
-				break;
-			case 'duck':
-				me.setProps('duck');
-				break;
-			case 'unduck':
-				me.setProps('unduck');
-				break;
 			case 'ducking':
 				me.setProps('ducking');
 				break;
@@ -107,20 +98,30 @@ export default class Biker extends Sprite {
 		if (me.tick >= me.tpf) {
 			me.tick = 0;
 			me.switchFrame();
+			me.canvas.getContext('2d').clearRect(0, 0, 200, me.canvas.height);
+			me.draw();
 		}
-
-		let cbk = me.reDraw.bind(me);
-		window.requestAnimationFrame(cbk);
 	}
 
-	switchFrame(set) { // we use set with value true or 1 in order to start from first frame, it's only called when switching animations
+	switchFrame() {
 		let me = this;
+		console.log('switching frames');
 
 		if (me.jumping) {
+			console.log(me.frameIndex);
+			// debugger
 			// change horizontal position according to jumping force
-			me.pos.y = me.pos.y - me.verticalVelocity;
-			me.verticalVelocity = me.verticalVelocity - me.gravity;
-			me.origin.x = me.frameSequence[1] * me.width;
+
+			if (me.frameIndex === 0) {
+				// me.origin.x = me.frameSequence[me.frameIndex] * me.width;
+				me.frameIndex++;
+			} else {
+				console.log('frame index is not 0');
+				me.pos.y = me.pos.y - me.verticalVelocity;
+				me.verticalVelocity = me.verticalVelocity - me.gravity;
+				me.origin.x = me.frameSequence[1] * me.width;
+			}
+
 
 			// when reaching the top of the jump and start falling switch to next frame
 			if (me.verticalVelocity < 0) {
@@ -128,47 +129,25 @@ export default class Biker extends Sprite {
 			}
 
 			// perform landing when horizontal position hits ground level
-			if (me.pos.y >= me.groundLevel) {
+			if (me.pos.y > me.groundLevel) {
 				me.jumping = false;
 				me.verticalVelocity = 0;
 				me.pos.y = me.groundLevel;
 				me.origin.x = me.frameSequence[3] * me.width;
 				me.frameIndex = me.frameNum - 1;
+
+				me.desiredAction ? (me.desiredAction === 'jump' ? me.jump() : me.duck()) : me.ride();
 			}
-		} else { // if not jumping
 
-			// if the function is called on animation switch
-			if (set) {
-				me.origin.x = me.frameSequence[0] * me.width;
+			// me.origin.x = me.frameSequence[me.frameIndex]*me.width
+
+		} else {
+			if (me.frameIndex === me.frameNum - 1) {
+				me.doNextAction();
 			} else {
-
-				// if an action button is held down while jumping
-				if (me.desiredAction && me.action === 'jump') {
-					me.nextAction = me.desiredAction;
-
-					// prevent continuous jumping
-					if (me.desiredAction === 'jump') {
-						me.action = 'ride';
-					}
-				}
-
-				// at last frame of an animation call next animation if there is one
-				if (me.nextAction && me.frameIndex === me.frameNum - 1) {
-					me.doNextAction();
-					return;
-				}
-
-				// update the frame index
-				me.frameIndex = me.frameIndex >= me.frameNum - 1 ? 0 : me.frameIndex + 1;
+				me.frameIndex++;
 				me.origin.x = me.frameSequence[me.frameIndex] * me.width;
 			}
-
-			// update the frame row
-			me.origin.y = me.frameRow * me.height;
 		}
-
-		// clear canvas and redraw
-		me.canvas.getContext('2d').clearRect(0, 0, 200, me.canvas.height);
-		me.draw();
 	}
 }

@@ -6,7 +6,7 @@ export const animations = {
 		tpf: Infinity
 	},
 	ride: {
-		nextAction: null,
+		nextAction: 'ride',
 		frameRow: 0,
 		frameSequence: [0, 1, 2, 3, 4, 5, 6, 7],
 		tpf: 4
@@ -30,7 +30,7 @@ export const animations = {
 		tpf: 4
 	},
 	ducking: {
-		nextAction: null,
+		nextAction: 'ducking',
 		frameRow: 1,
 		frameSequence: [1, 2, 3, 4, 5, 6],
 		tpf: 4

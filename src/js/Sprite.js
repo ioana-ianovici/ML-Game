@@ -2,6 +2,7 @@ export default class Sprite {
 	constructor(options) {
 		let me = this;
 		me.canvas = options.canvas;
+		me.ctx = options.canvas.getContext('2d');
 		me.image = new Image();
 		me.image.src = options.imageSrc;
 		me.origin = options.origin;
@@ -11,18 +12,21 @@ export default class Sprite {
 		me.pos = options.pos;
 	}
 
-	draw(){
+	draw() {
 		let me = this,
-				context = me.canvas.getContext('2d');
+				// avoid rational positions to improve CPU work
+				x = Math.floor(me.pos.x),
+				y = Math.floor(me.pos.y);
+		// console.log(x, y);
 
-		context.drawImage(
+		me.ctx.drawImage(
 				me.image,
 				me.origin.x,
 				me.origin.y,
 				me.width,
 				me.height,
-				me.pos.x,
-				me.pos.y,
+				x,
+				y,
 				me.width,
 				me.height
 		);
