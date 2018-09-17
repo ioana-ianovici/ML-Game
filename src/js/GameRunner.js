@@ -24,10 +24,8 @@ export default class GameRunner {
 	loadElements() {
 		let me = this;
 		window.addEventListener("load", () => {
-			// me.sky.move();
 			me.trail.reDraw();
 			me.biker.draw();
-			// me.biker.reDraw();
 			me.score.showScore(0);
 			me.runAnimation();
 		});
@@ -103,21 +101,19 @@ export default class GameRunner {
 		canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
 
 		me.currentStatus = 'running';
-		// me.clearAll();
 		if (me.HIScore > 0) {
 			me.score.showHIScore(me.HIScore);
 		}
 		me.currentSpeed = settings.initialSpeed;
 		me.points = 0;
 		me.obstacles = new Obstacles();
-		// me.runGame();
 	}
 
 	// the recurrent game logic
 	runGame() {
 		let me = this;
 
-		// if (me.checkCollision()) return;
+		if (me.checkCollision()) return;
 
 		me.currentSpeed += me.acceleration;
 		me.points += me.currentSpeed / 50;
@@ -127,7 +123,6 @@ export default class GameRunner {
 		me.obstacles.move(me.currentSpeed);
 
 		AICtrl.evaluate();
-		// me.animID = window.requestAnimationFrame(() => me.runGame());
 	}
 
 	checkCollision() {
@@ -202,8 +197,5 @@ export default class GameRunner {
 		// quick fix to remove obstacles at game over
 		let canvas = document.getElementById("obstacle-layer");
 		canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-
-		// stop the recurrence through this.runGame()
-		// window.cancelAnimationFrame(me.animID);
 	}
 }

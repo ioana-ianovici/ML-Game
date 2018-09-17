@@ -105,18 +105,13 @@ export default class Biker extends Sprite {
 
 	switchFrame() {
 		let me = this;
-		console.log('switching frames');
 
 		if (me.jumping) {
-			console.log(me.frameIndex);
-			// debugger
-			// change horizontal position according to jumping force
 
 			if (me.frameIndex === 0) {
 				// me.origin.x = me.frameSequence[me.frameIndex] * me.width;
 				me.frameIndex++;
 			} else {
-				console.log('frame index is not 0');
 				me.pos.y = me.pos.y - me.verticalVelocity;
 				me.verticalVelocity = me.verticalVelocity - me.gravity;
 				me.origin.x = me.frameSequence[1] * me.width;
