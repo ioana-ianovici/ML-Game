@@ -1,4 +1,7 @@
 export default class FirstAI {
+	constructor(){
+	}
+
 	decide(distance, flying, speed) {
 		let action = 'nothing';
 
@@ -18,3 +21,11 @@ export default class FirstAI {
 		return action
 	}
 }
+
+/*
+urmeaza de instalat numjs
+si de creat functia de forward propagation
+apoi de continuat tutorialul
+
+
+ */
