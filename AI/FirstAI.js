@@ -1,4 +1,4 @@
-export default class BasicAI {
+export default class FirstAI {
 	decide(distance, flying, speed) {
 		let action = 'nothing';
 
@@ -14,6 +14,7 @@ export default class BasicAI {
 				action = 'jump'
 			}
 		}
+		// console.log(action);
 		return action
 	}
 }

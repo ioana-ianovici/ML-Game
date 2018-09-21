@@ -9,7 +9,7 @@ import {settings} from "./Settings";
 export default class GameRunner {
 	constructor() {
 		let me = this;
-		me.currentStatus = 'idle';
+		me.state = 'idle';
 		me.acceleration = settings.acceleration;
 		me.HIScore = 0;
 
@@ -36,7 +36,7 @@ export default class GameRunner {
 		me.sky.move();
 		me.biker.reDraw();
 
-		me.currentStatus === 'running' ? me.runGame() : 'do nothing';
+		me.state === 'running' ? me.runGame() : 'do nothing';
 
 		me.animID = window.requestAnimationFrame(()=>{me.runAnimation()})
 	}
@@ -54,10 +54,10 @@ export default class GameRunner {
 				case 38:
 				case 32:
 					e.preventDefault();
-					if (me.currentStatus === 'idle') {
+					if (me.state === 'idle') {
 						me.startGame();
 					}
-					if (me.currentStatus === 'running') {
+					if (me.state === 'running') {
 						biker.jump();
 						if (biker.jumping) {
 							biker.desiredAction = 'jump';
@@ -66,7 +66,7 @@ export default class GameRunner {
 					break;
 				case 40:
 					e.preventDefault();
-					if (me.currentStatus === 'running' && !me.biker.jumping) {
+					if (me.state === 'running' && !me.biker.jumping) {
 						biker.duck();
 					}
 					if (biker.jumping) {
@@ -75,12 +75,12 @@ export default class GameRunner {
 			}
 		} else if (e.type === 'keyup') {
 			biker.desiredAction = null;
-			if (e.keyCode === 40 && me.currentStatus === 'running' && (me.biker.action === 'ducking' || me.biker.action === 'duck')) {
+			if (e.keyCode === 40 && me.state === 'running' && (me.biker.action === 'ducking' || me.biker.action === 'duck')) {
 				e.preventDefault();
 				biker.unduck();
 			}
 		} else if (e.type === 'touchstart') {
-			if (me.currentStatus === 'idle') {
+			if (me.state === 'idle') {
 				me.startGame();
 			}
 			biker.jump();
@@ -89,9 +89,9 @@ export default class GameRunner {
 
 	addHandlers() {
 		let handler = this.processHandlers.bind(this);
-		window.addEventListener('keydown', handler);
-		window.addEventListener('keyup', handler);
-		window.addEventListener('touchstart', handler);
+		addEventListener('keydown', handler);
+		addEventListener('keyup', handler);
+		addEventListener('touchstart', handler);
 	}
 
 	startGame() {
@@ -100,7 +100,7 @@ export default class GameRunner {
 
 		canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
 
-		me.currentStatus = 'running';
+		me.state = 'running';
 		if (me.HIScore > 0) {
 			me.score.showHIScore(me.HIScore);
 		}
@@ -121,8 +121,6 @@ export default class GameRunner {
 
 		me.trail.move(me.currentSpeed);
 		me.obstacles.move(me.currentSpeed);
-
-		AICtrl.evaluate();
 	}
 
 	checkCollision() {
@@ -175,7 +173,7 @@ export default class GameRunner {
 		let me = this,
 				score = Math.floor(me.points);
 
-		me.currentStatus = 'crash';
+		me.state = 'crash';
 
 		// update HI score
 		if (score > me.HIScore) {
@@ -185,10 +183,7 @@ export default class GameRunner {
 
 		// set a timeout to prevent instant game restart
 		setTimeout(() => {
-			me.currentStatus = 'idle';
-			if (AICtrl.restart){
-				AICtrl.start();
-			}
+			me.state = 'idle';
 		}, settings.game_over_delay);
 
 		// diplay game over text

@@ -1,10 +1,8 @@
 import './css/main.css'
 import GameRunner from './js/GameRunner'
-import AIControls from "../AI/AIControls";
-import BasicAI from "../AI/BasicAI";
+import FirstAI from "../AI/FirstAI"
+import AIControls from "../AI/AIControls"
 
 
-window.game = new GameRunner();  //to be used for development
-window.AICtrl = new AIControls();
-window.AI = new BasicAI();
-// new GameRunner();  //to be used in production
+window.game = new GameRunner();
+new AIControls(FirstAI);

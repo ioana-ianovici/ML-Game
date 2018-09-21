@@ -1,23 +1,39 @@
 export default class AIControls {
-	constructor() {
-		this.restart = false;
-		this.autostart = false;
-		this.isON = false;
-		if (this.autostart){
-			setTimeout(this.start.bind(this), 1500);
+	constructor(AItype) {
+		let me = this;
+		me.AI = new AItype();
+		me.isON = true;
+		me.restart = true;
+		if (me.isON) {
+			setTimeout(me.start.bind(me), 1000);
 		}
 	}
 
 	evaluate() {
-		if (this.isON){
-			let closest = this.getClosest();
-			let distance = closest.distance, //distance to the closest obstacle
-					flying = closest.flying, //the type of the closest obstacle
-					speed = game.currentSpeed;
-			if (AI && this.autostart){
-				AI.decide(distance, flying, speed)
+		let me = this;
+		if (me.isON) {
+			if (game.state === "idle" && me.restart) {
+				me.jump()
+			} else {
+				let closest = me.getClosest();
+				let distance = closest.distance, //distance to the closest obstacle
+						flying = closest.flying, //the type of the closest obstacle: true if is flying and false if it's not
+						speed = game.currentSpeed;
+
+				switch (this.AI.decide(distance, flying, speed)) {
+					case 'jump':
+						me.jump();
+						break;
+					case 'duck':
+						me.duck();
+						break;
+					case 'unduck':
+						me.unduck();
+						break;
+				}
 			}
 		}
+		requestAnimationFrame(me.evaluate.bind(me))
 	}
 
 	jump() {
@@ -28,38 +44,45 @@ export default class AIControls {
 	}
 
 	duck() {
-		this.simulateKeyEvent(40);
+		if (!this.ducking) {
+			this.simulateKeyEvent(40);
+			this.ducking = true
+		}
+
 	}
 
 	unduck() {
-		this.simulateKeyEvent(40, 'up');
+		if (this.ducking) {
+			this.simulateKeyEvent(40, 'up');
+			this.ducking = false
+		}
 	}
 
 	getClosest() {
-		let me = game.obstacles,
+		let obs = game.obstacles,
 				positions = [],
 				obstacles = [];
 
-		for (let i = 1; i <= me.obstaclesNumber; i++) {
+		for (let i = 1; i <= obs.obstaclesNumber; i++) {
 			let obstacleName = 'obstacle_' + i,
 					pos;
 
-			pos = me[obstacleName].pos.x;
-			obstacles.push(me[obstacleName]);
+			pos = obs[obstacleName].pos.x;
+			obstacles.push(obs[obstacleName]);
 			positions.push(pos)
 		}
 
 		let distance = Math.min(...positions);
-		let obs = obstacles.find(el => el.pos.x === Math.min(...positions)),
-				flying = !!obs.speed;
+		let first = obstacles.find(el => el.pos.x === Math.min(...positions)),
+				flying = !!first.speed;
 
 		return {distance, flying}
 	};
 
 	start() {
-		this.jump();
-		// setTimeout(this.duck.bind(this), 1000);
-		// setTimeout(this.unduck.bind(this), 2000);
+		let me = this;
+		me.jump();
+		requestAnimationFrame(me.evaluate.bind(me));
 	}
 
 	simulateKeyEvent(keyCode, type) {
