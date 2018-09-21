@@ -2,7 +2,7 @@ export default class AIControls {
 	constructor(AItype) {
 		let me = this;
 		me.AI = new AItype();
-		me.isON = true;
+		me.isON = false;
 		me.restart = true;
 		if (me.isON) {
 			setTimeout(me.start.bind(me), 1000);
